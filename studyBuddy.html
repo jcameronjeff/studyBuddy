@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="full-height">
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Study Buddy</title>
+    <style>
+
+  body {
+    font-size: 18px;
+  }
+
+  main {
+    width: 100%
+  }
+
+
+
+/* Study Buddy Background */
+
+#studyBuddy{
+      padding:200px;
+      background-image: url("sbFrontFrame.png");
+      width: 550px;
+      margin-top: 100px;
+      background-repeat: no-repeat;
+      background-size: contain;
+}
+
+/* Left and Right side buttons*/
+
+#outerLeft{
+      margin-top: -95px;
+}
+
+#outerRight{
+float: right;
+margin-top: -222px;
+margin-right: -164px;
+}
+
+#sbUp{
+  margin-left: 33px;
+}
+#sbDwn{
+  margin-top: 7px;
+margin-left: 32px;
+margin-bottom: -10px;
+}
+#sbLft{
+  margin-top: 8px;
+}
+
+.sbMenSel{
+
+  margin-left: 15px;
+
+}
+#sbMenuBtn{
+  margin-top: -5px;
+}
+.answerBtns{
+      position: relative;
+      margin-top: 123px;
+      margin-left: -142px;
+
+}
+
+.answerBtn{
+
+    width: 90px;
+}
+
+.sbArrow{
+  padding: 20px;
+}
+
+.correct{
+      background-color: green;
+}
+
+.incorrect{
+    background-color: red;
+}
+
+/* Frame for all dynamic content */
+
+#frame{
+      position: relative;
+      height: 300px;
+      width: 480px;
+      margin: 0 auto;
+      margin-top: -280px;
+      margin-left: 30px;
+
+
+    }
+
+#question{
+     margin-top: -40px
+}
+.menu-heading{
+  margin-top: 0;
+  text-align: right;
+  padding: 0 0 5px 0;
+  border-bottom-style: solid;
+  border-bottom-color: red;
+}
+.hideMe{
+      display: none;
+}
+
+#animation{
+  margin-left: 40px;
+  margin-top: -10px;
+}
+
+#sbMenu{
+  margin-left: 80px;
+  margin-top: 60px
+}
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  /* position: absolute; /* Remove input from document flow */ */
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:2px solid #f00;
+}
+
+    </style>
+</head>
+<body>
+
+    <!--Main Navigation-->
+    <header>
+
+
+
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main Layout-->
+    <main>
+        <div class="container" id="studyBuddy">
+
+      <!--StudyBuddy Left Buttons-->
+          <div id='outerLeft'>
+            <div class="answerBtns">
+                <input type="image" src="btnA.png" class = "answerBtn" id="btnA" value="a">
+                <br>
+                <input type="image" src="btnB.png" class = "answerBtn" id="btnB" value="b">
+                <br>
+                <input type="image" src="btnC.png" class = "answerBtn" id="btnC" value="c">
+                <br>
+                <input type="image" src="btnD.png"class = "answerBtn"  id="btnD" value="d">
+                <br>
+            </div>
+          </div>
+
+        <!--StudyBuddy Buttons-->
+          <!--StudyBuddy Right Buttons-->
+          <div id='outerRight'>
+            <div class="sbMenuBtns">
+                <a class='sbArrow'><img id='sbUp' src='sbUp.png'></a>
+                <br>
+                <a class='sbArrow'><img id='sbLft' src='sbLeft.png'></a>
+
+                <a class='sbArrow'><img id='sbRt' src='sbRight.png'></a>
+                <br>
+                <a class='sbArrow'><img id='sbDwn' src='sbDown.png'></a>
+
+            </div>
+            <br>
+            <a class='sbMenSel'><img id='sbSelectBtn' src='sbSelect.png'></a>
+            <br>
+            <a class='sbMenSel'><img id='sbMenuBtn' src='sbMenu.png'></a>
+          </div>
+            <!--StudyBuddy Buttons-->
+          <!--Content Screen-->
+            <div id="frame">
+
+
+            </div>
+            <div id="lessonData">
+
+            </div>
+            <!--Content Screen-->
+
+
+    </main>
+    <!--Main Layout-->
+
+    <!--  SCRIPTS  -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="studyBuddy.js">
+
+  </script>
+</body>
+</html>
