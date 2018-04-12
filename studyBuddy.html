@@ -1,93 +1,102 @@
 <!DOCTYPE html>
 <html lang="en" class="full-height">
+
 <head>
-    <!-- Required meta tags always come first -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Study Buddy</title>
-    <style>
+  <style>
+    body {
+      font-size: 18px;
+       font-family: Arial, Helvetica, sans-serif;
+    }
 
-  body {
-    font-size: 18px;
-  }
-
-  main {
-    width: 100%
-  }
+    main {
+      width: 100%
+    }
 
 
 
-/* Study Buddy Background */
+    /* Study Buddy Background */
 
-#studyBuddy{
-      padding:200px;
+    #studyBuddy {
+      padding: 200px;
       background-image: url("sbFrontFrame.png");
       width: 550px;
       margin-top: 100px;
       background-repeat: no-repeat;
       background-size: contain;
-}
+    }
 
-/* Left and Right side buttons*/
+    /* Left and Right side buttons*/
 
-#outerLeft{
+    #outerLeft {
       margin-top: -95px;
-}
+    }
 
-#outerRight{
-float: right;
-margin-top: -222px;
-margin-right: -164px;
-}
+    #outerRight {
+      float: right;
+      margin-top: -222px;
+      margin-right: -164px;
+    }
 
-#sbUp{
-  margin-left: 33px;
-}
-#sbDwn{
-  margin-top: 7px;
-margin-left: 32px;
-margin-bottom: -10px;
-}
-#sbLft{
-  margin-top: 8px;
-}
+    #sbUp {
+      margin-left: 33px;
+    }
 
-.sbMenSel{
+    #sbDwn {
+      margin-top: 7px;
+      margin-left: 32px;
+      margin-bottom: -10px;
+    }
 
-  margin-left: 15px;
+    #sbLft {
+      margin-top: 8px;
+    }
 
-}
-#sbMenuBtn{
-  margin-top: -5px;
-}
-.answerBtns{
+    .sbMenSel {
+
+      margin-left: 15px;
+
+    }
+
+    .menu-disabled {
+      color: grey;
+    }
+
+    #sbMenuBtn {
+      margin-top: -5px;
+    }
+
+    .answerBtns {
       position: relative;
       margin-top: 123px;
       margin-left: -142px;
 
-}
+    }
 
-.answerBtn{
+    .answerBtn {
 
-    width: 90px;
-}
+      width: 90px;
+    }
 
-.sbArrow{
-  padding: 20px;
-}
+    .sbArrow {
+      padding: 20px;
+    }
 
-.correct{
-      background-color: green;
-}
+    .correct {
+      color: green;
+    }
 
-.incorrect{
-    background-color: red;
-}
+    .incorrect {
+      color: red;
+    }
 
-/* Frame for all dynamic content */
+    /* Frame for all dynamic content */
 
-#frame{
+    #frame {
       position: relative;
       height: 300px;
       width: 480px;
@@ -98,112 +107,147 @@ margin-bottom: -10px;
 
     }
 
-#question{
-     margin-top: -40px
-}
-.menu-heading{
-  margin-top: 0;
-  text-align: right;
-  padding: 0 0 5px 0;
-  border-bottom-style: solid;
-  border-bottom-color: red;
-}
-.hideMe{
+    .answer-icon {
+      margin-bottom: -5px;
+      margin-right: 5px;
+    }
+
+    .x-icon {
+      margin-left: -25px;
+      margin-bottom: -5px;
+    }
+
+    .y-icon{
+        margin-left: -25px;
+        margin-bottom: -5px;
+    }
+
+    #question {
+      margin-top: -40px
+    }
+  .questionText{
+padding-left: 10px;
+  }
+    .menu-heading {
+      margin-top: 0;
+
+      text-align: right;
+      padding: 0 10px 5px 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-bottom-style: solid;
+      border-bottom-color: red;
+      -webkit-box-shadow: 0px 5px 2px -1px rgba(50, 50, 50, 0.75);
+      -moz-box-shadow: 0px 5px 2px -1px rgba(50, 50, 50, 0.75);
+      box-shadow: 0px 5px 2px -1px rgba(50, 50, 50, 0.75);
+    }
+
+    .hideMe {
       display: none;
-}
+    }
 
-#animation{
-  margin-left: 40px;
-  margin-top: -10px;
-}
+    #animation {
+      margin-left: 40px;
+      margin-top: -10px;
+    }
 
-#sbMenu{
-  margin-left: 80px;
-  margin-top: 60px
-}
+    #sbMenu {
+      margin-left: 80px;
+      margin-top: 60px
+    }
 
-label > input{ /* HIDE RADIO */
-  visibility: hidden; /* Makes input not-clickable */
-  /* position: absolute; /* Remove input from document flow */ */
+    .selected {
+      border: 2px solid #f00;
+    }
+.answer-image{
+  float: right;
+margin-top: -180px;
+margin-right: 20px;
 }
-label > input + img{ /* IMAGE STYLES */
+.answers {
+  line-height: 2.3;
+  margin-top: 100px;
+}
+    /*
+label > input{
+  visibility: hidden;
+  position: absolute;
+}
+label > input + img{
   cursor:pointer;
   border:2px solid transparent;
 }
-label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+label > input:checked + img{
   border:2px solid #f00;
 }
-
-    </style>
+*/
+  </style>
 </head>
+
 <body>
 
-    <!--Main Navigation-->
-    <header>
+  <!--Main Navigation-->
+  <header>
 
 
 
-    </header>
-    <!--Main Navigation-->
+  </header>
+  <!--Main Navigation-->
 
-    <!--Main Layout-->
-    <main>
-        <div class="container" id="studyBuddy">
+  <!--Main Layout-->
+  <main>
+    <div class="container" id="studyBuddy">
 
       <!--StudyBuddy Left Buttons-->
-          <div id='outerLeft'>
-            <div class="answerBtns">
-                <input type="image" src="btnA.png" class = "answerBtn" id="btnA" value="a">
-                <br>
-                <input type="image" src="btnB.png" class = "answerBtn" id="btnB" value="b">
-                <br>
-                <input type="image" src="btnC.png" class = "answerBtn" id="btnC" value="c">
-                <br>
-                <input type="image" src="btnD.png"class = "answerBtn"  id="btnD" value="d">
-                <br>
-            </div>
-          </div>
+      <div id='outerLeft'>
+        <div class="answerBtns">
+          <input type="image" src="btnA.png" class="answerBtn" id="btnA" value="a">
+          <br>
+          <input type="image" src="btnB.png" class="answerBtn" id="btnB" value="b">
+          <br>
+          <input type="image" src="btnC.png" class="answerBtn" id="btnC" value="c">
+          <br>
+          <input type="image" src="btnD.png" class="answerBtn" id="btnD" value="d">
+          <br>
+        </div>
+      </div>
 
-        <!--StudyBuddy Buttons-->
-          <!--StudyBuddy Right Buttons-->
-          <div id='outerRight'>
-            <div class="sbMenuBtns">
-                <a class='sbArrow'><img id='sbUp' src='sbUp.png'></a>
-                <br>
-                <a class='sbArrow'><img id='sbLft' src='sbLeft.png'></a>
+      <!--StudyBuddy Buttons-->
+      <!--StudyBuddy Right Buttons-->
+      <div id='outerRight'>
+        <div class="sbMenuBtns">
+          <a class='sbArrow'><img id='sbUp' src='sbUp.png'></a>
+          <br>
+          <a class='sbArrow'><img id='sbLft' src='sbLeft.png'></a>
 
-                <a class='sbArrow'><img id='sbRt' src='sbRight.png'></a>
-                <br>
-                <a class='sbArrow'><img id='sbDwn' src='sbDown.png'></a>
+          <a class='sbArrow'><img id='sbRt' src='sbRight.png'></a>
+          <br>
+          <a class='sbArrow'><img id='sbDwn' src='sbDown.png'></a>
 
-            </div>
-            <br>
-            <a class='sbMenSel'><img id='sbSelectBtn' src='sbSelect.png'></a>
-            <br>
-            <a class='sbMenSel'><img id='sbMenuBtn' src='sbMenu.png'></a>
-          </div>
-            <!--StudyBuddy Buttons-->
-          <!--Content Screen-->
-            <div id="frame">
-
-
-            </div>
-            <div id="lessonData">
-
-            </div>
-            <!--Content Screen-->
+        </div>
+        <br>
+        <a class='sbMenSel'><img id='sbSelectBtn' src='sbSelect.png'></a>
+        <br>
+        <a class='sbMenSel'><img id='sbMenuBtn' src='sbMenu.png'></a>
+      </div>
+      <!--StudyBuddy Buttons-->
+      <!--Content Screen-->
+      <div id="frame">
 
 
-    </main>
-    <!--Main Layout-->
+      </div>
+      <div id="lessonData">
 
-    <!--  SCRIPTS  -->
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+      </div>
+      <!--Content Screen-->
+
+
+  </main>
+  <!--Main Layout-->
+
+  <!--  SCRIPTS  -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="studyBuddy.js">
-
   </script>
 </body>
+
 </html>
