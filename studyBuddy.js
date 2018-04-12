@@ -1,7 +1,7 @@
 $.noConflict();
 jQuery(document).ready(function($) {
 
-  //question as object; probably will turn this into constructor//
+ //question data
   var scienceQuestions = [
     {
       lesson: "Electricity",
@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
       stem: "What event did the student observe?",
       image: "<img src ='sci1.jpg' class='answer-image'>",
       answers: [
-        {
+         {
           text: "lightning flashing in the sky",
           correct: true,
           feedback: "<p>Lightning is an example of static electricity. </p><p>In storm clouds, the positive particles gather near the top and the negative particles gather near the bottom. </p> <p>This static electricity is eventually released as lightning.</p>"
@@ -255,14 +255,18 @@ jQuery(document).ready(function($) {
       ]
     }
   ];
-  //Dom Elements
 
+    //--------------------------//
+   //      Dom Elements
+  //--------------------------//
+  //Holder Divs
   var frameDiv = $("#frame");
   var questionDiv = $("#question");
   var questionHTML = $("<div>").attr({'id': 'questionText'});
   var feedbackDiv = $("<div id='feedbackDiv'>");
   var animationDiv = $("#animation");
 
+  //arrow navigators
   var sbUp = $("#sbUp");
   var sbLft = $("#sbLft");
   var sbRt = $("#sbRt");
@@ -275,12 +279,15 @@ jQuery(document).ready(function($) {
   var selectable = $(".selectable");
   var selected = $(".selected");
 
+
+
   //--------------------------//
   //-- DOM helper functions --//
   //--------------------------//
   function toggleFrame(show) {
     frameDiv.empty();
     frameDiv.append(show);
+    show.show();
   }
 
   function changeHeading(newText) {
@@ -296,6 +303,9 @@ jQuery(document).ready(function($) {
     $(".selected").prev().removeClass("selected");
   }
 
+
+//----click handlers ----//
+
   sbSelectBtn.click(function() {
     $(".selected").click()
   });
@@ -307,49 +317,88 @@ jQuery(document).ready(function($) {
   sbDwn.click(function() {
     selectNext();
   });
-  //----click handlers ----//
+
+  sbRt.click(function() {
+    selectNext();
+    nextQhandler();
+  });
+
+
+  sbLft.click(function() {
+    selectLast();
+    lastQuestion();
+  });
+
   sbMenuBtn.click(function() {
     frameDiv.empty();
-    currentLesson = "";
-    questionCounter = 0;
-    currentMode = 0;
-    score = 0;
-    gotRight = [];
-    mistakes = [];
+    clearGlobals();
     renderMenu();
   });
 
-  document.onkeydown = function myFunction() {
-    switch (event.keyCode) {
-      case 38:
-        console.log("Up key is pressed");
-        selectLast();
-        break;
-      case 40:
-        console.log("Down key is pressed");
-        selectNext();
-        break;
-      case 37:
-        selectLast();
-        console.log("Right key is pressed");
-        break;
-      case 39:
-        selectNext();
-        console.log("left key is pressed");
-        break;
-      case 13:
-        $(".selected").click();
-        break;
+  function nextQhandler(){
+      if (currentLesson[1] != null){
+        nextQuestion();
+      }
     }
-  };
+
+  function lastQhandler(){
+      if (currentLesson[1] != null){
+        lastQuestion();
+      }
+    }
+  // document.onkeydown = function myFunction() {
+  //   switch (event.keyCode) {
+  //     case 38:
+  //       console.log("Up key is pressed");
+  //       selectLast();
+  //       break;
+  //     case 40:
+  //       console.log("Down key is pressed");
+  //       selectNext();
+  //       break;
+  //     case 37:
+  //       selectLast();
+  //       console.log("Right key is pressed");
+  //       break;
+  //     case 39:
+  //       selectNext();
+  //       console.log("left key is pressed");
+  //       break;
+  //     case 13:
+  //       $(".selected").click();
+  //       break;
+  //   }
+  // };
   // ---- Globals -----//
 
-  var currentLesson;
+  var currentLesson = [];
   var questionCounter = 0;
   var currentMode = 0;
   var score = 0;
+  var questionBank = [];
   var gotRight = [];
   var mistakes = [];
+  var reviewLesson = [];
+  var animationTimeout;
+
+  var clearGlobals = function(){
+    currentLesson = [];
+    questionBank = [];
+    questionCounter = 0;
+    currentMode = 0;
+    questionCount = 0;
+    score = 0;
+    gotRight = [];
+    mistakes = [];
+    reviewLesson = [];
+  }
+
+  function unbindThis(){
+    $(this).off()
+  }
+
+
+
 
   //----------------------------//
   //------- Menu Routing-------//
@@ -357,6 +406,11 @@ jQuery(document).ready(function($) {
 
   function renderMenu() {
 
+    clearGlobals();
+    // $(".answerBtn").off();
+
+    clearTimeout(animationTimeout);
+    console.log('renderMenu questionCounter', questionCounter)
     var mainMenu = $("<input type='image' ind='0' data = 'Math' value='large' class ='sbSubject selected' src='math.png'/>" + "<input type='image' ind='0' data = 'Science' value='large' class='sbSubject' src='science.png'/>");
 
     toggleFrame(mainMenu);
@@ -370,6 +424,7 @@ jQuery(document).ready(function($) {
     var mathSubjectMenu = $("<h4 class='menu-disabled'>Add-Subtract Whole Numbers</h4><h4 class='menu-disabled'>Multiply-Divide Whole Numbers</h4><h4 class='menu-disabled'>Compare and Order</h4>");
 
     var sciSubjectMenu = $("<h4 class='menu-disabled'>Add-Subtract Whole Numbers</h4><h4 class='menu-disabled'>Multiply-Divide Whole Numbers</h4><h4 class='menu-disabled'>Compare and Order</h4>");
+
     $('.sbSubject').click(function() {
       var selectedMenu = $(this).attr("data");
       console.log(selectedMenu);
@@ -406,6 +461,8 @@ jQuery(document).ready(function($) {
 
     function renderLessonMenu(titleText) {
 
+      clearTimeout(animationTimeout);
+
       var lessonMenu = $("<h3>" + titleText + "</h3><br><h3 class='lessonMenuitem aclick selected' data='A'>A)Play Lesson</h5><h3 class='lessonMenuitem bclick' data='B'>B) Study</h3><h3 class='lessonMenuitem cclick' data='C'>C) Test</h3>");
       toggleFrame(lessonMenu);
 
@@ -420,7 +477,7 @@ jQuery(document).ready(function($) {
             playAnimation(selectedAnimation);
             break;
           case "B":
-            // $(".answerBtn").off();
+            //
             console.log("make Study");
             makeStudy(titleText);
             break;
@@ -430,14 +487,14 @@ jQuery(document).ready(function($) {
             break;
         }
       });
-      $(".answerBtn").addClass('lessonBtn');
-
-      $(".lessonBtn").click(function() {
-        var choiceId = $(this).attr("value");
-        console.log(choiceId);
-        $("." + choiceId + "click").trigger("click");
-
-      });
+      // $(".answerBtn").addClass('lessonBtn');
+      //
+      // $(".lessonBtn").click(function(){
+      //   var choiceId = $(this).attr("value");
+      //   console.log(choiceId);
+      //   $("." + choiceId + "click").trigger("click");
+      //
+      // });
     };
   };
 
@@ -448,15 +505,17 @@ jQuery(document).ready(function($) {
     frameDiv.empty();
     var animation = $("<video id='animation' controls autoplay width='400'><source src=" + vid + " type='video/mp4'></video>");
     frameDiv.append(animation);
-    animation.bind("ended", function() {
-      console.log('ended');
+    animationTimeout = setTimeout(function(){
+      animation.trigger('pause');
       renderMenu();
-
-    });
+    }, 20000);
   };
 
   // Builds the Html for each question.
   function makeQuestion(inputQuestion) {
+
+    console.log(questionCounter);
+    console.log(currentLesson[0].lesson);
     questionHTML.html("");
     // var questionHTML = $("<div>").attr({"id": "questionText"});
     var stem = $("<a>" + inputQuestion.context + "</a>").addClass('questionStem').append("<p>").append("<p>" + inputQuestion.stem);
@@ -489,12 +548,18 @@ jQuery(document).ready(function($) {
 
       $(stem).append(answer);
     });
+    //
+    // var questionNavLft = $("<img src='sbLeft.png' id='quesNavLeft' class='quesNav'>");
+    // var questionNavRt = $("<img src='sbRight.png' id='quesNavRight' class='quesNav'>");
 
     questionHTML.append(stem);
     questionHTML.append(questionImage);
+
+
     toggleFrame(questionHTML);
 
   };
+
 
   $(".answerBtn").click(function() {
     var choiceId = $(this).attr("value");
@@ -507,6 +572,7 @@ jQuery(document).ready(function($) {
   //Calls checker function, which pulls corresponsing answer feedback data from the DOM
 
   function checker(choiceId, btnId) {
+    console.log('checker question count = ' + questionCounter);
     var answerChoice = $("#answ" + choiceId);
     var correct = answerChoice.attr("value");
     var feedbackText = answerChoice.attr("feedback");
@@ -519,7 +585,7 @@ jQuery(document).ready(function($) {
     switch (true) {
       case((correct === "C") && (currentMode >= 1)):
         gotRight.push(currentLesson[questionCounter]);
-        score += 1;
+        score ++;
         nextQuestion();
         break;
       case((correct === "I") && (currentMode >= 1)):
@@ -540,7 +606,7 @@ jQuery(document).ready(function($) {
 
         answerChoice.prepend(iconY);
         gotRight.push(currentLesson[questionCounter]);
-        score += 1;
+        score ;
         console.log(unAnswered() + "," + questionCounter);
         console.log("Pushed correct: " + gotRight[0]);
         toggleFeedback(feedbackText);
@@ -570,7 +636,7 @@ jQuery(document).ready(function($) {
   function toggleFeedback(feedbackText) {
     frameDiv.append(feedbackDiv);
     questionHTML.hide();
-    feedbackDiv.html("<div>" + feedbackText + "<button id='closeBtn'>Close</button><div>").addClass('feedback selected');
+    feedbackDiv.html("<div>" + feedbackText + "<h5 id='closeBtn' class='selected'>Close</h5><div>").addClass('feedback');
     $("#feedbackDiv").click(function() {
       $("#feedbackDiv").remove();
       questionHTML.show();
@@ -578,14 +644,11 @@ jQuery(document).ready(function($) {
   };
 
   function makeStudy(inputLesson) {
+    questionCounter = 0;
+    currentMode = 0;
+    console.log("makeStudy question counter" + questionCounter);
     sbLft.addClass('lastQ');
     sbRt.addClass('nextQ');
-    $(".nextQ").click(function() {
-      nextQuestion();
-    })
-    $(".lastQ").click(function() {
-      lastQuestion();
-    })
     $(".lessonBtn").removeClass("lessonBtn");
     if (inputLesson === "Electricity") {
       currentLesson = scienceQuestions;
@@ -595,25 +658,38 @@ jQuery(document).ready(function($) {
       currentLesson = mathQuestions;
       var firstQuestion = mathQuestions[0];
       makeQuestion(firstQuestion);
+    } else{
+      var firstQuestion = mistakes[0];
+      makeQuestion(firstQuestion);
     }
   };
 
+
   function makeTest(inputLesson) {
-    currentMode += 1;
-    makeStudy(inputLesson)
+
+    makeStudy(inputLesson);
+    currentMode ++;
   };
 
   function nextQuestion() {
-    $(".incorrect").removeClass("incorrect");
-    $("incorrect").removeClass("incorrect");
-    // feedbackDiv.html('');
-    questionCounter += 1;
-    console.log(questionCounter);
-    if (questionCounter >= currentLesson.length) {
-      studyScore();
-    } else {
-      makeQuestion(currentLesson[questionCounter])
+    if(unAnswered()){
+      mistakes.push(mistakes.push(currentLesson[questionCounter]));
+      console.log("pushed incorrect");
     }
+
+
+      $(".incorrect").removeClass("incorrect");
+      $("incorrect").removeClass("incorrect");
+      // feedbackDiv.html('');
+      questionCounter ++;
+      console.log(questionCounter);
+      if (questionCounter >= currentLesson.length) {
+        studyScore();
+      } else {
+        makeQuestion(currentLesson[questionCounter])
+      }
+
+
   }
 
   function lastQuestion() {
@@ -623,12 +699,16 @@ jQuery(document).ready(function($) {
   }
 
   var reviewMistakes = function() {
+    mistakes.forEach((ques) => {
+      reviewLesson.push(ques);
+    });
     questionCounter = 0;
     currentMode = 0;
     score = 0;
-    currentLesson = mistakes;
+    mistakes = [];
+    currentLesson = reviewLesson;
     console.log(currentLesson.length);
-    makeQuestion(mistakes[0]);
+    makeQuestion(currentLesson[0]);
   }
 
   function studyScore() {
@@ -636,12 +716,13 @@ jQuery(document).ready(function($) {
     var mistakesTitle = "<h3>" + currentLesson[0].lesson + "</h3>";
     var finalScore = "<h3>Score: " + (
     gotRight.length / currentLesson.length) * 100 + "%</h3>";
-    var reviewH3 = $("<h3>").text("Review Mistakes").css("text-align", "right").click(reviewMistakes).addClass("selected");
-
+    var reviewH3 = $("<h3 id='rev-mistakes'>").text("Review Mistakes").css("text-align", "right").click(reviewMistakes).addClass("selected");
+    sbLft.removeClass('lastQ');
+    sbRt.removeClass('nextQ');
     scoreDiv.append(mistakesTitle, finalScore, reviewH3);
-
     toggleFrame(scoreDiv);
     changeHeading("Scores");
+
   };
 
   //--------------------------//
