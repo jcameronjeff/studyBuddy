@@ -238,6 +238,12 @@ jQuery(document).ready(function($) {
   setTimeout(function(){
     $("#lessonData").hide(3000)
   },7000);
+
+  $('#info-button').on('click', function(){
+    $('#lessonData').toggle(3000);
+  });
+
+
   //--------------------------//
   //      Dom Elements
   //--------------------------//
