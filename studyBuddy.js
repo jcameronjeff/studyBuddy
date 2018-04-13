@@ -1,5 +1,5 @@
 $.noConflict();
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function($) {
 
   //question data
   var scienceQuestions = [{
@@ -235,7 +235,9 @@ jQuery(document).ready(function ($) {
     }]
   }];
 
-
+  setTimeout(function(){
+    $("#lessonData").hide(3000)
+  },7000);
   //--------------------------//
   //      Dom Elements
   //--------------------------//
@@ -279,11 +281,12 @@ jQuery(document).ready(function ($) {
   selectLast = function () {
     $(".selected").prev().addClass("selected");
     $(".selected").next().removeClass("selected");
-  }
+  };
+
   var selectNext = function () {
     $(".selected").next().addClass("selected");
     $(".selected").prev().removeClass("selected");
-  }
+  };
 
 
   //----click handlers ----//
@@ -294,7 +297,7 @@ jQuery(document).ready(function ($) {
 
   sbUp.click(function () {
     selectLast();
-  })
+  });
 
   sbDwn.click(function () {
     selectNext();
@@ -331,13 +334,20 @@ jQuery(document).ready(function ($) {
 
   // ---- Globals -----//
 
-  var currentLesson = []; //array of questions. Right now just toggling between math/science
-  var questionCounter = 0; //questionCounter is used as the index of the question array to show. 
-  var currentMode = 0; //currentMode is 0 for study, 1 for test. 
-  var gotRight = []; //Correct Answer Holder
-  var mistakes = []; //Incorrect Answers Holder
-  var reviewLesson = []; //Incorrect Answers are pushed here. Current Lesson can be set to reviewLesson
-  var animationTimeout; //Callback variable for ending the animation. Currently set to pause at 20sec and render menu. 
+  var currentLesson = []; 
+  //array of questions. Right now just toggling between math/science
+  var questionCounter = 0; 
+  //questionCounter is used as the index of the question array to show. 
+  var currentMode = 0; 
+  //currentMode is 0 for study, 1 for test. 
+  var gotRight = []; 
+  //Correct Answer Holder
+  var mistakes = [];
+   //Incorrect Answers Holder
+  var reviewLesson = []; 
+  //Incorrect Answers are pushed here. Current Lesson can be set to reviewLesson
+  var animationTimeout; 
+  //Callback variable for ending the animation. Currently set to pause at 20sec and render menu. 
 
   //Clear it all out for next lesson. 
   var clearGlobals = function () {
@@ -396,9 +406,7 @@ jQuery(document).ready(function ($) {
     $('.sbSubject').click(function () {
       var selectedMenu = $(this).attr("data");
       console.log(selectedMenu);
-
       changeHeading("Choose a Lesson");
-
       switch (selectedMenu) {
         case "Math":
           subjectMenu.text("Place Value Multiplication");
@@ -417,8 +425,8 @@ jQuery(document).ready(function ($) {
           changeHeading("Scores");
       }
     });
+  
     //   User Selects Lesson, Append Lesson Menu
-    //
     subjectMenu.click(function () {
       currentLessonTitle = titleText;
       console.log("Lesson Title Click");
@@ -428,10 +436,9 @@ jQuery(document).ready(function ($) {
     });
 
     function renderLessonMenu(titleText) {
-
       clearTimeout(animationTimeout);
 
-      var lessonMenu = $("<h3>" + titleText + "</h3><br><h3 class='lessonMenuitem aclick selected' data='A'>A)Play Lesson</h5><h3 class='lessonMenuitem bclick' data='B'>B) Study</h3><h3 class='lessonMenuitem cclick' data='C'>C) Test</h3>");
+      var lessonMenu = $("<h3>" + titleText + "</h3><br><h3 class='lessonMenuitem aclick selected' data='A'>Play Lesson</h5><h3 class='lessonMenuitem bclick' data='B'>Study</h3><h3 class='lessonMenuitem cclick' data='C'>Test</h3>");
       toggleFrame(lessonMenu);
 
       var lessonTitle = titleText.toLowerCase().replace(/\s+/g, '');
@@ -439,7 +446,6 @@ jQuery(document).ready(function ($) {
 
       $(".lessonMenuitem").click(function () {
         var lessonMi = $(this).attr('data');
-
         switch (lessonMi) {
           case "A":
             playAnimation(selectedAnimation);
@@ -456,7 +462,7 @@ jQuery(document).ready(function ($) {
         }
       });  
   }
-
+  }
   renderMenu();
 
   //Play Animation
@@ -468,7 +474,7 @@ jQuery(document).ready(function ($) {
       animation.trigger('pause');
       renderMenu();
     }, 20000);
-  };
+  }
 
   // Builds the Html for each question.
   function makeQuestion(inputQuestion) {
@@ -530,6 +536,7 @@ jQuery(document).ready(function ($) {
 
     toggleFrame(questionHTML);
   }
+  //end of makeQuestion()
 
 
   $(".answerBtn").click(function () {
@@ -537,7 +544,7 @@ jQuery(document).ready(function ($) {
     var btnId = $(this).attr('id');
     checker(choiceId, btnId);
   });
-
+  
   //Answer click handlers
   //If a button is clicked, pulls the letter value
   //Calls checker function, which pulls corresponsing answer feedback data from the DOM
@@ -586,8 +593,7 @@ jQuery(document).ready(function ($) {
         toggleFeedback(feedbackText);
         break;
     }
-
-  };
+  }
 
   var unAnswered = function () {
     var answered = mistakes.length + gotRight.length;
@@ -597,7 +603,7 @@ jQuery(document).ready(function ($) {
     } else if (answered >= questionCount) {
       return 0;
     }
-  };
+  }
 
   //Toggle handler for diplaying/hiding feedback
   function toggleFeedback(feedbackText) {
@@ -650,22 +656,21 @@ jQuery(document).ready(function ($) {
     if (questionCounter >= currentLesson.length) {
       studyScore();
     } else {
-      makeQuestion(currentLesson[questionCounter])
+      makeQuestion(currentLesson[questionCounter]);
     }
   }
 
   function lastQuestion() {
     $(".correct").removeClass("correct");
     $(".incorrect").removeClass("incorrect");
-    makeQuestion(currentLesson[questionCounter - 1])
+    makeQuestion(currentLesson[questionCounter - 1]);
   }
 
-  var reviewMistakes = function () { 
+  var reviewMistakes = function() { 
     //Push mistakes into a new lesson for review mistakes.
     mistakes.forEach(function(ques){
       reviewLesson.push(ques);
     });
-
     //reset counter, so iteration via nextQuestion() can continue
     questionCounter = 0;
     currentMode = 0;
@@ -711,35 +716,8 @@ jQuery(document).ready(function ($) {
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-
     return array;
   }
 
-
-
-    // Allows Navigation by keypress for debugging.
   
-  // document.onkeydown = function myFunction() {
-  //   switch (event.keyCode) {
-  //     case 38:
-  //       console.log("Up key is pressed");
-  //       selectLast();
-  //       break;
-  //     case 40:
-  //       console.log("Down key is pressed");
-  //       selectNext();
-  //       break;
-  //     case 37:
-  //       selectLast();
-  //       console.log("Right key is pressed");
-  //       break;
-  //     case 39:
-  //       selectNext();
-  //       console.log("left key is pressed");
-  //       break;
-  //     case 13:
-  //       $(".selected").click();
-  //       break;
-  //   }
-  // };
 });
