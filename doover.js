@@ -137,15 +137,9 @@ const questionBank = [
 ];
 
 
-var lesson = questionBank.filter(function(question){
-  if(question.lesson === )
-})
-
-function Question(id, lesson, context, stem, answers){
 
 
-animation: function(){
-  return this.lesson + ".mp4"
-}
+    var lessonConstructor = function(lesson){
 
-}
+      
+      }
