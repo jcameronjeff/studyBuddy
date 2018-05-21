@@ -10,9 +10,8 @@
   <style>
     body {
       font-size: 18px;
-       font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
-
     main {
       width: 100%
     }
@@ -28,6 +27,10 @@
     }
 
     /* Left and Right side buttons*/
+
+    img {
+      cursor: pointer;
+    }
 
     #outerLeft {
       margin-top: -95px;
@@ -100,6 +103,8 @@
       margin: 0 auto;
       margin-top: -280px;
       margin-left: 30px;
+
+
     }
 
     .answer-icon {
@@ -112,18 +117,20 @@
       margin-bottom: -5px;
     }
 
-    .y-icon{
-        margin-left: -25px;
-        margin-bottom: -5px;
+    .y-icon {
+      margin-left: -25px;
+      margin-bottom: -5px;
     }
 
     #question {
       margin-top: -40px
     }
 
-  .questionText{
-padding-left: 10px;
-  }
+    #questionText {
+      padding-left: 10px;
+      margin-left: 5px;
+    }
+
     .menu-heading {
       margin-top: 0;
 
@@ -132,17 +139,21 @@ padding-left: 10px;
       background-color: rgba(255, 255, 255, 0.2);
       border-bottom-style: solid;
       border-bottom-color: red;
-      -webkit-box-shadow: 0px 5px 2px -1px rgba(50, 50, 50, 0.75);
-      -moz-box-shadow: 0px 5px 2px -1px rgba(50, 50, 50, 0.75);
-      box-shadow: 0px 5px 2px -1px rgba(50, 50, 50, 0.75);
+
+    }
+
+    .main-menu {
+      width: 480px;
+      margin: 0 auto;
+      text-align: center;
     }
 
 
-
-    #quesNavLeft{
+    #quesNavLeft {
       margin-left: 45%;
       margin-right: 20px;
     }
+
     .hideMe {
       display: none;
     }
@@ -160,43 +171,96 @@ padding-left: 10px;
     .selected {
       border: 2px solid #f00;
     }
-.answer-image{
-  float: right;
-margin-top: -180px;
-margin-right: 20px;
-}
-.answers {
-  line-height: 2.3;
-  margin-top: 100px;
-}
 
-#rev-mistakes{
-  float: right;
-  margin: -150px 0 0 0;
-}
+    .answer-image {
+      float: right;
+      margin-top: -180px;
+      margin-right: 20px;
+    }
 
-.lessonTitle {
-  max-width: 300px;
-}
+    .answers {
+      line-height: 2.3;
+      margin-top: 100px;
+    }
 
-.lessonMenuitem {
-  width: 200px;
-}
-#feedbackDiv{
-  border: none !important;
-}
-#closeBtn{
-  width:80px;
-}
-#frame{
-    overflow: hidden;
-}
+    #rev-mistakes {
+      float: right;
+      margin: -150px 0 0 0;
+    }
+
+    .lessonTitle {
+      max-width: 300px;
+      width: 400;
+      margin-top: 40px;
+    }
+
+    #scores-table {
+      margin-top: 40px;
+    }
+
+    .lessonMenuitem {
+      width: 200px;
+    }
+
+    #feedbackDiv {
+      border: none !important;
+    }
+
+    #feedbackDiv>p {
+
+      vertical-align: middle;
+      line-height: 2;
+      margin-bottom: 20px;
+
+    }
+
+    #feedbackDiv>p>img {
+      max-height: 240px;
+      text-align: center;
+      margin-left: 10%;
+    }
+
+    #closeBtn {
+      width: 80px;
+      margin: 0;
+      position: fixed;
+      left: 225px;
+      top: 550px;
+
+    }
+
+    #lessonData{
+      position: fixed;
+      border: 1px solid black;
+      top: 10px;
+      left: 15px;
+      padding: 15px 15px 5px 30px;
+      
+    }
+ #lessonData > p {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  
+ }
+
+ #info-button{
+      background-color: none;
+    border: none;
+ }
+  
   </style>
 </head>
 
 <body>
+
+    <button id='info-button'><img src='infobtn.png' height ='30px' /></button>
+  <div id="lessonData">
+      <p>Welcome! Use the arrows to navigate.</p>
+      <p>Pess SELECT to choose the highlighted item</p>
+      <p>Press the A, B, C, D, buttons to answer questions.</p>
+    </div>
   <!--Main Layout-->
- 
+  <main>
     <div class="container" id="studyBuddy">
 
       <!--StudyBuddy Left Buttons-->
@@ -217,83 +281,108 @@ margin-right: 20px;
       <!--StudyBuddy Right Buttons-->
       <div id='outerRight'>
         <div class="sbMenuBtns">
-          <a class='sbArrow'><img id='sbUp' src='sbUp.png'></a>
+          <a class='sbArrow'>
+            <img id='sbUp' src='sbUp.png'>
+          </a>
           <br>
-          <a class='sbArrow'><img id='sbLft' src='sbLeft.png'></a>
+          <a class='sbArrow'>
+            <img id='sbLft' src='sbLeft.png'>
+          </a>
 
-          <a class='sbArrow'><img id='sbRt' src='sbRight.png'></a>
+          <a class='sbArrow'>
+            <img id='sbRt' src='sbRight.png'>
+          </a>
           <br>
-          <a class='sbArrow'><img id='sbDwn' src='sbDown.png'></a>
+          <a class='sbArrow'>
+            <img id='sbDwn' src='sbDown.png'>
+          </a>
 
         </div>
         <br>
-        <a class='sbMenSel'><img id='sbSelectBtn' src='sbSelect.png'></a>
+        <a class='sbMenSel'>
+          <img id='sbSelectBtn' src='sbSelect.png'>
+        </a>
         <br>
-        <a class='sbMenSel'><img id='sbMenuBtn' src='sbMenu.png'></a>
+        <a class='sbMenSel'>
+          <img id='sbMenuBtn' src='sbMenu.png'>
+        </a>
       </div>
       <!--StudyBuddy Buttons-->
       <!--Content Screen-->
-      
       <div id="frame">
-        <div id="mainMenu" style='visibility: hidden'>
-            <button type='image' data = 'Math'  class ='sbSubject selected'src='math.png'></button>
-            <button type='image' data = 'Science' class='sbSubject' src='science.png'></button>
+          <div id ='menus'>
+        <!-- Main menu -->
+        <div class='main-menu menu-track'>
+          <input type='image' ind='0' data = 'Math' value='large' class ='sbSubject selected menu-item' src='math.png'/>" +
+          <input type='image' ind='0' data = 'Science' value='large' class='sbSubject  menu-item' src='science.png'/>"
+          <h4 id='view-scores' data='Scores' class ='sbSubject menu-item'>View Scores</h4>
+        </div> 
+        <!-- /Main menu -->
+ 
+       <!-- Subject Menu Math -->
+        <div class='subject-menu-math menu-track'>
+            <h3 class='menu-heading'>Choose a Lesson</h3>
+            <h4 class='lessonTitle selected menu-item'>Place Value Multiplication</h4>
+            <h4 class='menu-disabled'>Add-Subtract Whole Numbers</h4>
+            <h4 class='menu-disabled'>Multiply-Divide Whole Numbers</h4>
+            <h4 class='menu-disabled'>Compare and Order</h4>
         </div>
+          <!-- /Subject Menu Math -->
 
-        <div class="subject-menu" style='visibility:hidden'>
-            <div id ='subject-menu-math'>
-                <h4 class='menu-disabled'>Add-Subtract Whole Numbers</h4>
-                <h4 class='menu-disabled'>Multiply-Divide Whole Numbers</h4>
-                <h4 class='menu-disabled'>Compare and Order</h4>
+        <div class='subject-menu-science menu-track'>
+            <h3 class='menu-heading'>Choose a Lesson</h3>
+            <h4 class='lessonTitle selected menu-item'>Electricity</h4>
+            <h4 class='menu-disabled'>Properties of Matter</h4>
+            <h4 class='menu-disabled'>Energy Forms</h4>
+            <h4 class='menu-disabled'> Forces and Motion</h4>
+        </div>
+        <!-- /Subject Menu Science -->
+
+        <!-- Lesson Menu Options -->
+        <div class='lesson-menu menu-track'>
+            <h3 id='lesson-title'>Lesson Title</h3>
+            <br>
+            <h3 class='lessonMenuitem aclick selected' data='A'>Play Lesson</h3>
+            <h3 class='lessonMenuitem bclick' data='B'>Study</h3>
+            <h3 class='lessonMenuitem cclick' data='C'>Test</h3>
+        </div>
+        <!-- /Lesson Menu Options -->
+        </div>
+         
+         <!-- Play animation -->
+         <div class="play-animation">
+
+
+
+
+         </div>
+          <!-- /Play animation -->
+                  <!-- Play animation -->
+            <div class="question-holder">
+
+
+
+
             </div>
-            <div id ='subject-menu-science' style='visibility:hidden'>
-                 <h4 class='menu-disabled'>Add-Subtract Whole Numbers</h4>
-                 <h4 class='menu-disabled'>Multiply-Divide Whole Numbers</h4>
-                 <h4 class='menu-disabled'>Compare and Order</h4>
+          <!-- /Play animation -->
+          <div class="score-holder">
+
+
+
+
             </div>
-        </div>
-        
-        <div class="lessonmenu" syle='visibility: hidden'>
-                <h3>Please Select a Lesson</h3>
-                <h3 class='lessonMenuitem' data-mode='0'>Play Lesson</h3>
-                <h3 class='lessonMenuitem' data-mode='0'>Study</h3>
-                <h3 class='lessonMenuitem' data-mode='1'>Test</h3>
-        </div>
-        
-         <div id='animation-div' syle='visibility: hidden'>
-                <video id='animation' controls autoplay width='400'src="#" type='video/mp4'></video>
-        </div>
-
-                <div id='study' syle='visibility: hidden'>
-
-
-                </div>
-                <div id='review' syle='visibility: hidden'>
-                    
-
-                </div>
-
-                <div id='test'syle='visibility: hidden'>
-
-                    
-                </div>
-
-
       </div>
     
       <!--Content Screen-->
 
 
- 
-    <div id="lessonData">
-
-    </div>
-</div>
+  </main>
   <!--Main Layout-->
 
   <!--  SCRIPTS  -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="studybuddyjs.js">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="studyBuddy2.js">
   </script>
 </body>
 

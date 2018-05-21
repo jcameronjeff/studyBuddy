@@ -1,0 +1,53 @@
+
+
+
+user history = []?
+
+
+renderMenu()
+    - Science 
+        (onclick= "renderSubjectMenu('math')");
+    - Math
+     (onclick= "renderSubjectMenu('science')");
+    - view scores
+       (onclick= "renderSubjectMenu('scores')");
+
+renderSubjectMenu()
+    - lesson list item 1
+    - lesson list item 2
+    - lesson list item 3
+
+renderLessonMenu();
+    - playAnimation
+            currentLesson.animation
+    - makeStudy()
+            currentLesson.questions
+    - makeTest
+            currentLesson.questions
+
+
+makeStudy()
+
+
+ 
+playAnimation();
+renderStudy();
+renderTest();
+scoredDiv();
+reviewMistakes;
+
+
+
+currentQuestions = [
+
+    {question: "",
+        answers: [ 
+            text: "",
+            feedback: "",
+            correct: "",
+              ],
+        userAnswer: null,
+    }
+
+]
+

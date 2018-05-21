@@ -265,25 +265,24 @@ jQuery(document).ready(function($) {
   var sbSelectBtn = $("#sbSelectBtn");
   var sbMenuBtn = $("#sbMenuBtn");
 
-  var menuHeading = $("<h3>").addClass("menu-heading");
+  
+
   var selectable = $(".selectable");
   var selected = $(".selected");
-
-
+ 
+ 
 
   //--------------------------//
   //-- DOM helper functions --//
   //--------------------------//
   function toggleFrame(show) {
-    frameDiv.empty();
+    
+    frameDiv.children().hide();
     frameDiv.append(show);
     show.show();
+ 
   }
-
-  function changeHeading(newText) {
-    frameDiv.prepend(menuHeading.text(newText));
-  }
-
+ 
   selectLast = function () {
     $(".selected").prev().addClass("selected");
     $(".selected").next().removeClass("selected");
@@ -298,7 +297,8 @@ jQuery(document).ready(function($) {
   //----click handlers ----//
 
   sbSelectBtn.click(function () {
-    $(".selected").click()
+    $(".selected").last().click()
+    console.log('visible clicked')
   });
 
   sbUp.click(function () {
@@ -319,12 +319,25 @@ jQuery(document).ready(function($) {
     selectLast();
     lastQuestion();
   });
+  
+  
+  sbMenuBtn.click(function ( ) {
 
-  sbMenuBtn.click(function () {
-    frameDiv.empty();
+   var frameDivNum = $(".navItem:visible").attr("value").trim();
+   
+   console.log(frameDivNum);
+   var previous= frameDivNum - 1;
+
+  
+
+var lastMenu = $(`.navItem:eq(${previous})`)
+$(lastMenu).show(function(){$(".navItem:visible").last().remove()});
+  
     clearGlobals();
-    renderMenu();
+    
+     
   });
+ 
 
   function nextQhandler() {
     if (currentLesson[1] != null) {
@@ -354,7 +367,7 @@ jQuery(document).ready(function($) {
   //Incorrect Answers are pushed here. Current Lesson can be set to reviewLesson
   var animationTimeout; 
   //Callback variable for ending the animation. Currently set to pause at 20sec and render menu. 
-
+var selectHistory = [];
   //Clear it all out for next lesson. 
   var clearGlobals = function () {
     currentLesson = [];
@@ -383,6 +396,7 @@ jQuery(document).ready(function($) {
 
     clearTimeout(animationTimeout);
     console.log('renderMenu questionCounter', questionCounter)
+    var mainMenuDiv = $("<div class='navItem' value='0'>")
     var mainMenu = $("<div class='main-menu'><input type='image' ind='0' data = 'Math' value='large' class ='sbSubject selected' src='math.png'/>" + "<input type='image' ind='0' data = 'Science' value='large' class='sbSubject' src='science.png'/>");
 
     var viewScores = $("<h4>View Scores</h4>").attr({
@@ -397,55 +411,69 @@ jQuery(document).ready(function($) {
 
     mainMenu.append(viewScores);
 
-    toggleFrame(mainMenu);
+    var menuHeading = $("<h3 class='menu-heading'>Choose a Subject</h3>");
+    mainMenuDiv.append(menuHeading);
+    mainMenuDiv.append(mainMenu);
+    
+    toggleFrame(mainMenuDiv);
+  
 
-    changeHeading("Choose a Subject");
+
 
     // subjectMenuDiv = $("<div class='sbjdiv'>")
     //User Selects Subject, Append Subject Menu
+    var subjectMenuDiv  = $("<div class='navItem' value='1'><h3 class='menu-heading'>Choose a Lesson</h3>");
+ 
     var subjectMenu = $("<h3 class='lessonTitle selected'></h3>");
+    var sSubjectMenuHead = $("<h3 class='lessonTitle selected'></h3>");
 
     var mathSubjectMenu = $("<h4 class='menu-disabled'>Add-Subtract Whole Numbers</h4><h4 class='menu-disabled'>Multiply-Divide Whole Numbers</h4><h4 class='menu-disabled'>Compare and Order</h4>");
 
     var sciSubjectMenu = $("<h4 class='menu-disabled'>Properties of Matter</h4><h4 class='menu-disabled'>Energy Forms</h4><h4 class='menu-disabled'> Forces and Motion</h4>");
 
+     
     $('.sbSubject').click(function () {
       var selectedMenu = $(this).attr("data");
       console.log(selectedMenu);
-      changeHeading("Choose a Lesson");
+      
       switch (selectedMenu) {
         case "Math":
           subjectMenu.text("Place Value Multiplication");
-          toggleFrame(subjectMenu);
-          frameDiv.append(mathSubjectMenu)
-          changeHeading("Choose a Lesson");
+          subjectMenuDiv.append(subjectMenu);
+          subjectMenuDiv.append(mathSubjectMenu);
+          toggleFrame(subjectMenuDiv);
+         
+          selectHistory.push(function(){renderSubjectMenu("math")});
           break;
         case "Science":
           subjectMenu.text("Electricity")
-          toggleFrame(subjectMenu);
-          frameDiv.append(sciSubjectMenu);
-          changeHeading("Choose a Lesson");
+          subjectMenuDiv.append(subjectMenu);
+          subjectMenuDiv.append(sciSubjectMenu);
+          toggleFrame(subjectMenuDiv);
+          selectHistory.push(function(){renderSubjectMenu("science")});
           break;
         case "Scores":
           toggleFrame($("<img src='img/scores.png' id='scores-table' />"));
-          changeHeading("Scores");
+          
+          selectHistory.push(function(){renderSubjectMenu("scores")});
       }
     });
   
     //   User Selects Lesson, Append Lesson Menu
-    subjectMenu.click(function () {
+    subjectMenu.on('click', function () {
       currentLessonTitle = titleText;
       console.log("Lesson Title Click");
       var titleText = $(this).text();
       renderLessonMenu(titleText);
-      changeHeading("Choose a Mode");
+       var second = frameDiv.children().eq(2)
     });
 
     function renderLessonMenu(titleText) {
       clearTimeout(animationTimeout);
-
+      var lessonMenuDiv = $("<div class='navItem' value='2'><h3 class='menu-heading'>Choose a Mode</h3>");
       var lessonMenu = $("<h3>" + titleText + "</h3><br><h3 class='lessonMenuitem aclick selected' data='A'>Play Lesson</h5><h3 class='lessonMenuitem bclick' data='B'>Study</h3><h3 class='lessonMenuitem cclick' data='C'>Test</h3>");
-      toggleFrame(lessonMenu);
+      lessonMenuDiv.append(lessonMenu);
+      toggleFrame(lessonMenuDiv);
 
       var lessonTitle = titleText.toLowerCase().replace(/\s+/g, '');
       var selectedAnimation = lessonTitle + ".mp4";
