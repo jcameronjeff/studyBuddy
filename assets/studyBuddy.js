@@ -675,7 +675,7 @@ jQuery(document).ready(function($) {
     if (vid === "./animations/placevaluemultiplication.mp4") {
       animationTimeout = setTimeout(function() {
         animation.trigger("pause");
-      }, 37000);
+      }, 11000);
     }
   }
   //   User Selects Lesson, Append Lesson Menu
@@ -874,6 +874,7 @@ jQuery(document).ready(function($) {
         break;
       case correct === "I" && currentMode >= 1:
         mistakes.push(currentLesson[questionCounter]);
+        mistakes[mistakes.length - 1].answered = answerChoice;
         nextQuestion();
         break;
       case correct === "C" && currentMode < 1 && unAnswered() === 0:
@@ -1031,6 +1032,7 @@ jQuery(document).ready(function($) {
     console.log(currentLesson.length);
     makeQuestion(currentLesson[0]);
 
+    currentMode = 0;
     if (!$("#questionBottom:visible").length){
       $("#questionBottom").show();
     }
