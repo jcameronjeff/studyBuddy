@@ -72,7 +72,6 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Electricity",
-
       context:
         " If an electric circuit has a power source connected to devices, one after the other,",
       stem: " it is an example of",
@@ -107,7 +106,8 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Electricity",
-      stem: "<p></p>How is electricity usually brought to your house?",
+      context: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+      stem: "How is electricity usually brought to your house?",
       image: "<img src ='img/sci3.jpg' class='answer-image'>",
       answers: [
         {
