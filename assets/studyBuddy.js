@@ -672,7 +672,7 @@ jQuery(document).ready(function($) {
     );
     console.log(vid);
     toggleFrame(animation);
-    if (vid === "placevaluemultiplication.mp4") {
+    if (vid === "./animations/placevaluemultiplication.mp4") {
       animationTimeout = setTimeout(function() {
         animation.trigger("pause");
       }, 37000);
@@ -694,7 +694,7 @@ jQuery(document).ready(function($) {
     toggleFrame(lessonMenuDiv);
 
     var lessonTitle = titleText.toLowerCase().replace(/\s+/g, "");
-    var selectedAnimation = lessonTitle + ".mp4";
+    var selectedAnimation = "./animations/" + lessonTitle + ".mp4";
 
     $(".lessonMenuitem").click(function() {
       var lessonMi = $(this).attr("data");
