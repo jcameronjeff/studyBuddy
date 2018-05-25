@@ -12,18 +12,27 @@
       font-size: 18px;
       font-family: Arial, Helvetica, sans-serif;
     }
-    main {
-      width: 100%
-    }
-    /* Study Buddy Background */
 
+    main {
+      margin-top: 100px;
+      width: 100%;
+    }
+
+    /* Study Buddy Background */
+  span{
+    font-size: 1.2em;
+    line-height: 2em;
+    padding: 0px 20px 0px 20px;
+    font-weight: bold;
+    display: table
+  }
     #studyBuddy {
       padding: 200px;
       background-image: url("sbFrontFrame.png");
       width: 550px;
-      margin-top: 100px;
       background-repeat: no-repeat;
       background-size: contain;
+      margin: 0 auto;
     }
 
     /* Left and Right side buttons*/
@@ -42,17 +51,17 @@
       margin-right: -164px;
     }
 
-    #sbUp {
+    #sbUp>img {
       margin-left: 33px;
     }
 
-    #sbDwn {
+    #sbDwn>img {
       margin-top: 7px;
       margin-left: 32px;
-      margin-bottom: -10px;
+      margin-bottom: -10px
     }
 
-    #sbLft {
+    #sbLft>img {
       margin-top: 8px;
     }
 
@@ -64,10 +73,12 @@
 
     .menu-disabled {
       color: grey;
+      display: table
     }
 
     #sbMenuBtn {
       margin-top: -5px;
+      
     }
 
     .answerBtns {
@@ -84,16 +95,18 @@
 
     .sbArrow {
       padding: 20px;
+      cursor: pointer;
+      margin-left: -2px;
     }
-
-    .correct {
-      color: green;
+ 
+    #FBarrow {
+      position: absolute;
+    width: 50px;
+   
+    left: 48%;
+    margin-top: -70px;
+    z-index: 1000;
     }
-
-    .incorrect {
-      color: red;
-    }
-
     /* Frame for all dynamic content */
 
     #frame {
@@ -110,6 +123,10 @@
     .answer-icon {
       margin-bottom: -5px;
       margin-right: 5px;
+    }
+
+    .answer-q {
+      background-image: url("iconQ.png");
     }
 
     .x-icon {
@@ -190,20 +207,19 @@
 
     .lessonTitle {
       max-width: 300px;
-      width: 400;
       margin-top: 40px;
+      display: table;
     }
 
     #scores-table {
       margin-top: 40px;
     }
 
-    .lessonMenuitem {
-      width: 200px;
-    }
+    
 
     #feedbackDiv {
       border: none !important;
+      transform: translateZ(0);
     }
 
     #feedbackDiv>p {
@@ -223,42 +239,57 @@
     #closeBtn {
       width: 80px;
       margin: 0;
-      position: fixed;
-      left: 225px;
-      top: 550px;
 
     }
 
-    #lessonData{
+    .highlight {
+      -webkit-transition-duration: .5s;
+  -moz-transition-duration: .5s;
+  -o-transition-duration: .5s;
+  transition-duration: .5s;
+  -moz-box-shadow:    inset 0 0 10px #fbff00ec;
+   -webkit-box-shadow: inset 0 0 10px #fbff00ec;
+   box-shadow:         inset 0 0 10px #fbff00ec;
+   border-radius: 7px 7px 7px 7px;
+-moz-border-radius: 7px 7px 7px 7px;
+-webkit-border-radius: 7px 7px 7px 7px;
+    }
+ 
+
+    #lessonData {
       position: fixed;
-      border: 1px solid black;
-      top: 10px;
+      /* border: 1px solid black; */
+      top: 15px;
       left: 15px;
       padding: 15px 15px 5px 30px;
-      
-    }
- #lessonData > p {
-  font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
-  
- }
 
- #info-button{
+    }
+
+    #lessonData>p {
+
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    #info-button {
       background-color: none;
-    border: none;
- }
-  
+      border: none;
+    }
   </style>
 </head>
 
 <body>
 
-    <button id='info-button'><img src='infobtn.png' height ='30px' /></button>
+  <button id='info-button'>
+    <img src='infobtn.png' height='30px' />
+  </button>
   <div id="lessonData">
-      <p>Welcome! Use the arrows to navigate.</p>
-      <p>Pess SELECT to choose the highlighted item</p>
-      <p>Press the A, B, C, D, buttons to answer questions.</p>
-    </div>
+    <p>Welcome! Use the arrows  <img src='sbLeft.png'> <img src='sbRight.png'> to navigate.</p>
+    <p>Pess <a style="border: 2px solid black; border-radius: 8px; padding: 3px">SELECT</a> to choose the <a style="border: 1px solid red; border-radius: 5px; padding: 3px"> highlighted</a> item.</p>
+    <p> Press <a style="border: 2px solid black; border-radius: 8px; padding: 3px">MENU</a> to go back.</p>
+    <p>Press the A, B, C, D, buttons to answer questions.</p>
+  </div>
   <!--Main Layout-->
   <main>
     <div class="container" id="studyBuddy">
@@ -266,13 +297,13 @@
       <!--StudyBuddy Left Buttons-->
       <div id='outerLeft'>
         <div class="answerBtns">
-          <input type="image" src="btnA.png" class="answerBtn" id="btnA" value="a">
+          <input type="image" src="btnA.png" data-clicked class="answerBtn" id="btnA" value="a">
           <br>
-          <input type="image" src="btnB.png" class="answerBtn" id="btnB" value="b">
+          <input type="image" src="btnB.png" data-clicked class="answerBtn" id="btnB" value="b">
           <br>
-          <input type="image" src="btnC.png" class="answerBtn" id="btnC" value="c">
+          <input type="image" src="btnC.png" data-clicked class="answerBtn" id="btnC" value="c">
           <br>
-          <input type="image" src="btnD.png" class="answerBtn" id="btnD" value="d">
+          <input type="image" src="btnD.png" data-clicked class="answerBtn" id="btnD" value="d">
           <br>
         </div>
       </div>
@@ -281,20 +312,20 @@
       <!--StudyBuddy Right Buttons-->
       <div id='outerRight'>
         <div class="sbMenuBtns">
-          <a class='sbArrow'>
-            <img id='sbUp' src='sbUp.png'>
+          <a id='sbUp' class='sbArrow'>
+            <img src='sbUp.png'>
           </a>
           <br>
-          <a class='sbArrow'>
-            <img id='sbLft' src='sbLeft.png'>
+          <a id='sbLft' class='sbArrow'>
+            <img src='sbLeft.png'>
           </a>
 
-          <a class='sbArrow'>
-            <img id='sbRt' src='sbRight.png'>
+          <a id='sbRt' class='sbArrow'>
+            <img src='sbRight.png'>
           </a>
           <br>
-          <a class='sbArrow'>
-            <img id='sbDwn' src='sbDown.png'>
+          <a id='sbDwn' class='sbArrow'>
+            <img src='sbDown.png'>
           </a>
         </div>
         <br>
@@ -312,11 +343,12 @@
 
 
       </div>
-    
+
       <!--Content Screen-->
 
 
   </main>
+  <h3 id="timer"></h3>
   <!--Main Layout-->
 
   <!--  SCRIPTS  -->
