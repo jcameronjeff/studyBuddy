@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
       context:
         "This simple electrical circuit is made up of a battery, wire, light bulb and switch.",
       stem: "Which element controls the flow of electric charges?",
-      image: "<img src ='sci0.jpg' class='answer-image'>",
+      image: "<img src ='img/sci0.jpg' class='answer-image'>",
       answers: [
         {
           text: "the switch",
@@ -36,11 +36,11 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Electricity",
-      
+
       context:
         "A student observed an event and said, 'That was caused by static electricity!'",
       stem: "What event did the student observe?",
-      image: "<img src ='sci1.jpg' class='answer-image'>",
+      image: "<img src ='img/sci1.jpg' class='answer-image'>",
       answers: [
         {
           text: "lightning flashing in the sky",
@@ -72,11 +72,11 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Electricity",
-      
+
       context:
         " If an electric circuit has a power source connected to devices, one after the other,",
       stem: " it is an example of",
-      image: "<img src ='sci2.jpg' class='answer-image'>",
+      image: "<img src ='img/sci2.jpg' class='answer-image'>",
       answers: [
         {
           text: "a series circuit.",
@@ -107,10 +107,8 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Electricity",
-      
-      context: "<p></p>",
-      stem: "How is electricity usually brought to your house?",
-      image: "<img src ='sci3.jpg' class='answer-image'>",
+      stem: "<p></p>How is electricity usually brought to your house?",
+      image: "<img src ='img/sci3.jpg' class='answer-image'>",
       answers: [
         {
           text: "wires",
@@ -141,11 +139,11 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Electricity",
-      
+
       context:
         "This simple electrical circuit is made up of a battery, wire, light bulb and switch.",
       stem: "Which element serves as the energy source of the circuit?",
-      image: "<img src ='sci4.jpg' class='answer-image'>",
+      image: "<img src ='img/sci4.jpg' class='answer-image'>",
       answers: [
         {
           text: "the battery",
@@ -179,7 +177,7 @@ jQuery(document).ready(function($) {
   var mathQuestions = [
     {
       lesson: "Place Value Multiplication",
-      
+
       context:
         "There are 24 teams in a kickball contest. Each team has 12 players.",
       stem: "Which expression shows the total number of players?",
@@ -213,7 +211,7 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Place Value Multiplication",
-      
+
       context:
         "Jerome helps at his uncle's pet shop. The shop has 46 fish tanks with 12 fish in each tank.",
       stem: "How many fish are in all of the tanks together?",
@@ -243,11 +241,11 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Place Value Multiplication",
-      
+
       context:
         "Each of the 3 children in the Carlton family collected 2,502 soda cans to recycle.<br />3 x 2,502 = ___",
       stem: "Which expression will find the total number of cans?<br />",
-      image: "<img src ='img/ma2.png' class='answer-image'>",
+      image: "<img src ='img/ma2.jpg' class='answer-image'>",
       answers: [
         {
           text: "(3 x 2,000) + (3 x 500) + (3 x 2)",
@@ -274,7 +272,7 @@ jQuery(document).ready(function($) {
     },
     {
       lesson: "Place Value Multiplication",
-      
+
       context:
         " Farmer James plants 761 watermelon seeds each year. The expression below shows the amount he plants in 8 years.<br />8 x 761 = ___",
       stem: "Which expression can be used to fill in the blank?",
@@ -353,8 +351,14 @@ jQuery(document).ready(function($) {
   var questionHTML = $("<div>").attr({
     id: "questionText"
   });
+
+  var sbContainer = $("#studyBuddy");
   var feedbackDiv = $("<div id='feedbackDiv'>");
   var animationDiv = $("#animation");
+
+  var quesBottom = $(
+    "<span id='questionBottom'><a>Press</a> <img src='../img/iconQ.png' id='bottomQ' width='25 px'> <a>for feedback</a></span>"
+  );
 
   var hiddenMenus;
   //arrow navigators
@@ -376,7 +380,7 @@ jQuery(document).ready(function($) {
     frameDiv.children().hide();
     frameDiv.append(show);
     show.show();
-    $(".selected").removeClass("selected")
+    $(".selected").removeClass("selected");
   }
 
   selectLast = function() {
@@ -389,29 +393,27 @@ jQuery(document).ready(function($) {
   };
 
   var selectNext = function() {
- 
-    if (!$(".selected").length){
-      console.log("no selected")
-      $(".selectable:visible").first().addClass("selected")
-    }
-    else{  
+    if (!$(".selected").length) {
+      console.log("no selected");
+      $(".selectable:visible")
+        .first()
+        .addClass("selected");
+    } else {
       $(".selected")
-    .next()
-    .addClass("selected");
-  $(".selected")
-    .prev()
-    .removeClass("selected");
-      
+        .next()
+        .addClass("selected");
+      $(".selected")
+        .prev()
+        .removeClass("selected");
     }
-  
   };
 
-  function highlight(x){
-    console.log('clicked');
-    $(x).addClass('highlight');
-    
-    setTimeout(function(){
-      $(x).removeClass('highlight')
+  function highlight(x) {
+    console.log("clicked");
+    $(x).addClass("highlight");
+
+    setTimeout(function() {
+      $(x).removeClass("highlight");
     }, 2000);
   }
 
@@ -435,6 +437,11 @@ jQuery(document).ready(function($) {
 
   sbRt.click(function() {
     highlight($(this).children());
+    if ($("#feedbackDiv:visible").length) {
+      $("#feedbackDiv").remove();
+      questionHTML.show();
+      $("#FBarrow").remove();}
+
     selectNext();
     nextQhandler();
   });
@@ -442,16 +449,15 @@ jQuery(document).ready(function($) {
   sbLft.click(function() {
     highlight($(this).children());
 
-    if ($("#feedbackDiv:visible").length ){
+    if ($("#feedbackDiv:visible").length) {
       $("#feedbackDiv").remove();
       questionHTML.show();
-      $("#FBarrow").remove()
-    }
-    else{
+      $("#FBarrow").remove();
+      $("#questionBottom").show();
+    } else {
       selectLast();
       lastQhandler();
     }
-   
   });
 
   /**
@@ -488,7 +494,8 @@ jQuery(document).ready(function($) {
       console.log("leaving study or test mode");
       console.log(typeof hiddenMenus);
     }
-    $("#FBarrow").remove()
+    $("#FBarrow").remove();
+    $("#questionBottom").remove();
   });
 
   /**
@@ -511,12 +518,23 @@ jQuery(document).ready(function($) {
   }
 
   function nextQhandler() {
+    if ($("#feedbackDiv:visible").length) {
+      $("#feedbackDiv").remove();
+      questionHTML.show();
+      $("#FBarrow").remove();
+    }
+
     if (currentLesson[1] != null) {
       nextQuestion();
     }
   }
 
   function lastQhandler() {
+    if ($("#feedbackDiv:visible").length) {
+      $("#feedbackDiv").remove();
+      questionHTML.show();
+      $("#FBarrow").remove();
+    }
     if (currentLesson[1] != null) {
       lastQuestion();
     }
@@ -548,10 +566,16 @@ jQuery(document).ready(function($) {
     gotRight = [];
     mistakes = [];
     reviewLesson = [];
+    mathQuestions.forEach(function(ques) {
+        ques.answered = ''
+      });
+    scienceQuestions.forEach(function(ques) {
+        ques.answered = ''
+      })
+    
   };
   var subjectMenu;
 
-  
   //-----------------------------------//
   //------- Menu Rendering & Nav-------//
   //-----------------------------------//
@@ -565,8 +589,8 @@ jQuery(document).ready(function($) {
     console.log("renderMenu questionCounter", questionCounter);
     var mainMenuDiv = $("<div class='navItem' value='0'>");
     var mainMenu = $(
-      "<div class='main-menu'><input type='image' ind='0' data = 'Math' value='large' class ='sbSubject selectable' src='math.png'/>" +
-        "<input type='image' ind='0' data = 'Science' value='large' class='sbSubject' src='science.png'/>"
+      "<div class='main-menu'><input type='image' ind='0' data = 'Math' value='large' class ='sbSubject selectable' src='../img/math.png'/>" +
+        "<input type='image' ind='0' data = 'Science' value='large' class='sbSubject' src='../img/science.png'/>"
     );
 
     var viewScores = $("<h4>View Scores</h4>")
@@ -625,7 +649,7 @@ jQuery(document).ready(function($) {
 
           break;
         case "Scores":
-          toggleFrame($("<img src='img/scores.png' id='scores-table' />"));
+          toggleFrame($("<img src='../img/scores.png' id='scores-table' />"));
       }
     });
     subjectMenu.click(function() {
@@ -641,22 +665,18 @@ jQuery(document).ready(function($) {
 
   //Play Animation
   function playAnimation(vid) {
-    
     var animation = $(
       "<video id='animation' controls autoplay width='400'><source src=" +
         vid +
         " type='video/mp4'></video>"
     );
     console.log(vid);
-    toggleFrame(animation)
-    if (vid === "placevaluemultiplication.mp4"){
+    toggleFrame(animation);
+    if (vid === "placevaluemultiplication.mp4") {
       animationTimeout = setTimeout(function() {
         animation.trigger("pause");
       }, 37000);
-
     }
-   
-   
   }
   //   User Selects Lesson, Append Lesson Menu
 
@@ -696,6 +716,8 @@ jQuery(document).ready(function($) {
   }
   // Builds the Html for each question.
   function makeQuestion(inputQuestion) {
+    $("#questionBottom").remove();
+
     console.log(questionCounter);
     console.log(currentLesson[0].lesson);
     console.log("lesson length: " + currentLesson.length);
@@ -708,7 +730,7 @@ jQuery(document).ready(function($) {
     var answerBank = [];
     var answers = inputQuestion.answers;
     var questionImage = $(inputQuestion.image);
-    
+
     var answered = inputQuestion.answered;
 
     console.log($(answered).text());
@@ -716,16 +738,15 @@ jQuery(document).ready(function($) {
     answers.forEach(function(answer) {
       var html;
       if (answer.correct) {
-         html = $("<a>" + answer.text + "</a>")
+        html = $("<a>" + answer.text + "</a>")
           .addClass("answers")
           .attr({
             value: "C",
             feedback: answer.feedback
           })
           .append("<br>");
-        
       } else {
-         html = $("<a>" + answer.text + "</a>")
+        html = $("<a>" + answer.text + "</a>")
           .addClass("answers")
           .attr({
             value: "I",
@@ -734,8 +755,8 @@ jQuery(document).ready(function($) {
           .append("<br>");
       }
       //For Review Mistakes, check for previous answer
-      if (answered != null && answer.text === $(answered).text()){
-        html.addClass('prev-answered');
+      if (answered != null && answer.text === $(answered).text()) {
+        html.addClass("prev-answered");
       }
       answerBank.push(html);
     });
@@ -751,7 +772,7 @@ jQuery(document).ready(function($) {
       })
       .prepend(
         //adds the abcd icons
-        "<a id='ansBtnA'><img class='answer-icon' src='iconA.png' data-image='iconQ.png' id = 'iconA' alt='A) ' width='25' height='25'>"
+        "<a id='ansBtnA'><img class='answer-icon' src='../img/iconA.png' data-image='../img/iconQ.png' id = 'iconA' alt='A) ' width='25' height='25'>"
       );
 
     $(answerBank[1])
@@ -760,7 +781,7 @@ jQuery(document).ready(function($) {
         "data-letter": "b"
       })
       .prepend(
-        "<a id='ansBtnB'><img class='answer-icon' src='iconB.png' data-image='iconQ.png' id = 'iconB' alt='B) ' width='25' height='25'>"
+        "<a id='ansBtnB'><img class='answer-icon' src='../img/iconB.png' data-image='img/iconQ.png' id = 'iconB' alt='B) ' width='25' height='25'>"
       );
     $(answerBank[2])
       .attr({
@@ -768,7 +789,7 @@ jQuery(document).ready(function($) {
         "data-letter": "c"
       })
       .prepend(
-        "<a id='ansBtnC'><img class='answer-icon' src='iconC.png' data-image='iconQ.png' id = 'iconC' alt='C) ' width='25' height='25'> "
+        "<a id='ansBtnC'><img class='answer-icon' src='img/iconC.png' data-image='img/iconQ.png' id = 'iconC' alt='C) ' width='25' height='25'> "
       );
     $(answerBank[3])
       .attr({
@@ -776,9 +797,9 @@ jQuery(document).ready(function($) {
         "data-letter": "d"
       })
       .prepend(
-        "<a id='ansBtnD'><img class='answer-icon' src='iconD.png'id = 'iconD' data-image='iconQ.png' alt='D) ' width='25' height='25'> "
+        "<a id='ansBtnD'><img class='answer-icon' src='img/iconD.png'id = 'iconD' data-image='img/iconQ.png' alt='D) ' width='25' height='25'> "
       );
-      //Appends answeres to question
+    //Appends answeres to question
     answerBank.forEach(function(answer) {
       $(stem).append(answer);
     });
@@ -786,38 +807,42 @@ jQuery(document).ready(function($) {
     questionHTML.append(questionImage);
 
     toggleFrame(questionHTML);
+    if (currentMode < 1) {
+      frameDiv.append(quesBottom);
+    }
+
     //for review mistakes, adds X next to previous answer
-    if($(".prev-answered")){
-      $('.prev-answered').prepend("<img src='iconX.png' height=b'25 width ='25' class='x-icon'>");
+    if ($(".prev-answered")) {
+      $(".prev-answered").prepend(
+        "<img src='img/iconX.png' height=b'25 width ='25' class='x-icon'>"
+      );
     }
   }
   //end of makeQuestion()
- 
-
-
 
   //Answer click handlers
-  
+
   //handles user answer
   $(".answerBtn").click(function() {
     highlight(this);
-    if ($("#feedbackDiv:visible").length ){
+    if ($("#feedbackDiv:visible").length) {
       $("#feedbackDiv").remove();
-      $("#FBarrow").remove()
+      $("#FBarrow").remove();
       questionHTML.show();
+      $("#questionBottom").show();
     }
     // takes the button value to associate w/ corresponding answer choice
     else {
-    var choiceId = $(this).attr("value");
-    var btnId = $(this).attr("id");
-    checker(choiceId, btnId, this);
-  }
+      var choiceId = $(this).attr("value");
+      var btnId = $(this).attr("id");
+      checker(choiceId, btnId, this);
+    }
   });
 
   //Helper function, swaps the ABCD for a question mark
   function imgToggle(thisId, oldPic, newPic) {
-    $(thisId).attr('src', newPic);
-    $(thisId).attr('data-image', oldPic)
+    $(thisId).attr("src", newPic);
+    $(thisId).attr("data-image", oldPic);
   }
 
   //If a button is clicked, pulls the letter value
@@ -829,19 +854,17 @@ jQuery(document).ready(function($) {
     var correct = answerChoice.attr("value");
     var feedbackText = answerChoice.attr("feedback");
     var feedbackShown = false;
-    var answerIcon =  $(`#icon${choiceId.toUpperCase()}`);
-    
-    
-    var btnPic = answerIcon.attr('src');
-    var altPic = answerIcon.attr('data-image');
-   
-    
+    var answerIcon = $(`#icon${choiceId.toUpperCase()}`);
+
+    var btnPic = answerIcon.attr("src");
+    var altPic = answerIcon.attr("data-image");
+
     //Correct/Incorrect Icons
     var iconX = $(
-      "<img src='iconX.png' height=b'25 width ='25' class='x-icon'>"
+      "<img src='img/iconX.png' height=b'25 width ='25' class='x-icon'>"
     );
     var iconY = $(
-      "<img src='iconY.png' height='25 width ='25' class='y-icon'>"
+      "<img src='img/iconY.png' height='25 width ='25' class='y-icon'>"
     );
     // Switch statement to handle whether to score a question and/or move on.
     switch (true) {
@@ -863,16 +886,16 @@ jQuery(document).ready(function($) {
         break;
       case correct === "C" && unAnswered() && currentMode < 1:
         answerChoice.prepend(iconY);
-       
+
         gotRight.push(currentLesson[questionCounter]);
         console.log("Pushed correct");
         //toggleFeedback(feedbackText);
         break;
       case correct === "I" && unAnswered() && currentMode < 1:
         answerChoice.prepend(iconX);
-        
+
         mistakes.push(currentLesson[questionCounter]);
-        mistakes[mistakes.length - 1].answered = answerChoice; 
+        mistakes[mistakes.length - 1].answered = answerChoice;
         console.log(unAnswered() + "," + questionCounter);
         console.log("Pushed wrong" + mistakes[mistakes.length - 1].answered);
         //toggleFeedback(feedbackText);
@@ -881,21 +904,17 @@ jQuery(document).ready(function($) {
 
     //Data toggler to append the X or Checkmark on first click
     //Toggles feedback on second click.
-    if( currentMode < 1 && $(element).attr('data-clicked')){
-      $(element).attr('data-clicked', '');
-      imgToggle(answerIcon, btnPic, altPic )
+    if (currentMode < 1 && $(element).attr("data-clicked")) {
+      $(element).attr("data-clicked", "");
+      imgToggle(answerIcon, btnPic, altPic);
       toggleFeedback(feedbackText, answerIcon, btnPic, altPic);
+    } else if (!$(element).attr("data-clicked")) {
+      imgToggle(answerIcon, btnPic, altPic);
+      $(element).attr("data-clicked", "clicked");
     }
-    else if( !$(element).attr('data-clicked') ){
-      imgToggle(answerIcon, btnPic, altPic )
-      $(element).attr('data-clicked', 'clicked');
-
-    } 
-    
-    
   }
 
-//Helper function. Total answers < current question index = unAnswered
+  //Helper function. Total answers < current question index = unAnswered
   var unAnswered = function() {
     var answered = mistakes.length + gotRight.length;
     var questionCount = questionCounter + 1;
@@ -906,59 +925,53 @@ jQuery(document).ready(function($) {
     }
   };
 
-
   //Toggle handler for diplaying/hiding feedback
   function toggleFeedback(feedbackText, answerIcon, btnPic, altPic) {
-    if ($("#feedbackDiv:visible").length ){
-     $("#FBarrow").remove();
+    if ($("#feedbackDiv:visible").length) {
+      $("#FBarrow").remove();
       $("#feedbackDiv").remove();
       questionHTML.show();
-    }
-    else{
+      $("#questionBottom").show();
+    } else {
       questionHTML.hide();
+      $("#questionBottom").hide();
       frameDiv.append(feedbackDiv);
-      $("#studyBuddy").append( "<img src='img/arrows.png' id='FBarrow'>");
+      $("#studyBuddy").append(
+        "<span id='FBarrow'><a class='arrowtext'>Back</a><img src='img/arrows.png' width='50px' style='padding-top:10px; margin-bottom: -15px'><a class='arrowtext'>Next</a></span>"
+      );
       feedbackShown = true;
-      feedbackDiv
-        .html(
-          "<p>" +
-            feedbackText + "</p>" 
-           
-        )
-        .addClass("feedback");   
+      feedbackDiv.html("<p>" + feedbackText + "</p>").addClass("feedback");
       $("#feedbackDiv").click(function() {
-        
         $("#feedbackDiv").remove();
-        $("#FBarrow").remove()
+        $("#FBarrow").remove();
         questionHTML.show();
+        $("#questionBottom").show();
         feedbackShown = false;
       });
-      
-
-
     }
-    
-
   }
 
   //Builds Study Mode
   function makeStudy(inputLesson) {
+    clearGlobals();
     questionCounter = 0;
     currentMode = 0;
     console.log("makeStudy question counter" + questionCounter);
     sbLft.addClass("lastQ");
     sbRt.addClass("nextQ");
+    var firstQuestion
     $(".lessonBtn").removeClass("lessonBtn");
     if (inputLesson === "Electricity") {
       currentLesson = scienceQuestions;
-      var firstQuestion = scienceQuestions[0];
+       firstQuestion = scienceQuestions[0];
       makeQuestion(firstQuestion);
     } else if (inputLesson === "Place Value Multiplication") {
       currentLesson = mathQuestions;
-      var firstQuestion = mathQuestions[0];
+       firstQuestion = mathQuestions[0];
       makeQuestion(firstQuestion);
     } else {
-      var firstQuestion = mistakes[0];
+      currentLesson = mistakes;
+       firstQuestion = mistakes[0];
       makeQuestion(firstQuestion);
     }
   }
@@ -971,14 +984,14 @@ jQuery(document).ready(function($) {
 
   function nextQuestion() {
     if (unAnswered()) {
-      mistakes.push(mistakes.push(currentLesson[questionCounter]));
+      mistakes.push((currentLesson[questionCounter]));
       console.log("pushed incorrect");
     }
-    $(".incorrect").removeClass("incorrect");
+    
     //$("incorrect").removeClass("incorrect");
-    $('.answerBtn').each(function(i, ele){
-      $(ele).attr('data-clicked', '');
-    })
+    $(".answerBtn").each(function(i, ele) {
+      $(ele).attr("data-clicked", "");
+    });
     // feedbackDiv.html('');
     questionCounter++;
 
@@ -986,7 +999,12 @@ jQuery(document).ready(function($) {
       studyScore();
     } else {
       makeQuestion(currentLesson[questionCounter]);
+
+    if (!$("#questionBottom:visible").length){
+      $("#questionBottom").show();
     }
+    }
+
   }
 
   function lastQuestion() {
@@ -994,7 +1012,7 @@ jQuery(document).ready(function($) {
     $(".incorrect").removeClass("incorrect");
     makeQuestion(currentLesson[questionCounter - 1]);
   }
-  
+
   /* Review Mistakes */
 
   var reviewMistakes = function() {
@@ -1004,7 +1022,7 @@ jQuery(document).ready(function($) {
     mistakes.forEach(function(ques) {
       reviewLesson.push(ques);
     });
-    //reset counter, for iteration via nextQuestion() 
+    //reset counter, for iteration via nextQuestion()
     questionCounter = 0;
     currentMode = 0;
     //reset mistakes container
@@ -1012,14 +1030,19 @@ jQuery(document).ready(function($) {
     currentLesson = reviewLesson;
     console.log(currentLesson.length);
     makeQuestion(currentLesson[0]);
+
+    if (!$("#questionBottom:visible").length){
+      $("#questionBottom").show();
+    }
   };
 
   //Calculates score after lesson, appends the score screen.
   function studyScore() {
+    $("#questionBottom").remove();
     var scoreDiv = $("<div>").attr({
       id: "score-Div"
     });
-    var scores = ("<h3 class='menu-heading'>Scores</h3>")
+    var scores = "<h3 class='menu-heading'>Scores</h3>";
     var mistakesTitle = "<h3>" + currentLesson[0].lesson + "</h3>";
     var finalScore = "<h3>Score: " + gotRight.length / 5 * 100 + "%</h3>";
     var reviewH3 = $("<h3 id='rev-mistakes'>")
@@ -1031,7 +1054,6 @@ jQuery(document).ready(function($) {
     sbRt.removeClass("nextQ");
     scoreDiv.append(scores, mistakesTitle, finalScore, reviewH3);
     toggleFrame(scoreDiv);
-    
   }
 
   //--------------------------//

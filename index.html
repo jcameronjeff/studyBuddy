@@ -7,285 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Study Buddy</title>
-  <style>
-    body {
-      font-size: 18px;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+ <link rel="stylesheet" type="text/css" href="/assets/style.css">
 
-    main {
-      margin-top: 100px;
-      width: 100%;
-    }
-
-    /* Study Buddy Background */
-  span{
-    font-size: 1.2em;
-    line-height: 2em;
-    padding: 0px 20px 0px 20px;
-    font-weight: bold;
-    display: table
-  }
-    #studyBuddy {
-      padding: 200px;
-      background-image: url("sbFrontFrame.png");
-      width: 550px;
-      background-repeat: no-repeat;
-      background-size: contain;
-      margin: 0 auto;
-    }
-
-    /* Left and Right side buttons*/
-
-    img {
-      cursor: pointer;
-    }
-
-    #outerLeft {
-      margin-top: -95px;
-    }
-
-    #outerRight {
-      float: right;
-      margin-top: -222px;
-      margin-right: -164px;
-    }
-
-    #sbUp>img {
-      margin-left: 33px;
-    }
-
-    #sbDwn>img {
-      margin-top: 7px;
-      margin-left: 32px;
-      margin-bottom: -10px
-    }
-
-    #sbLft>img {
-      margin-top: 8px;
-    }
-
-    .sbMenSel {
-
-      margin-left: 15px;
-
-    }
-
-    .menu-disabled {
-      color: grey;
-      display: table
-    }
-
-    #sbMenuBtn {
-      margin-top: -5px;
-      
-    }
-
-    .answerBtns {
-      position: relative;
-      margin-top: 123px;
-      margin-left: -142px;
-
-    }
-
-    .answerBtn {
-
-      width: 90px;
-    }
-
-    .sbArrow {
-      padding: 20px;
-      cursor: pointer;
-      margin-left: -2px;
-    }
- 
-    #FBarrow {
-      position: absolute;
-    width: 50px;
-   
-    left: 48%;
-    margin-top: -70px;
-    z-index: 1000;
-    }
-    /* Frame for all dynamic content */
-
-    #frame {
-      position: relative;
-      height: 300px;
-      width: 480px;
-      margin: 0 auto;
-      margin-top: -280px;
-      margin-left: 30px;
-
-
-    }
-
-    .answer-icon {
-      margin-bottom: -5px;
-      margin-right: 5px;
-    }
-
-    .answer-q {
-      background-image: url("iconQ.png");
-    }
-
-    .x-icon {
-      margin-left: -25px;
-      margin-bottom: -5px;
-    }
-
-    .y-icon {
-      margin-left: -25px;
-      margin-bottom: -5px;
-    }
-
-    #question {
-      margin-top: -40px
-    }
-
-    #questionText {
-      padding-left: 10px;
-      margin-left: 5px;
-    }
-
-    .menu-heading {
-      margin-top: 0;
-
-      text-align: right;
-      padding: 0 10px 5px 0;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-bottom-style: solid;
-      border-bottom-color: red;
-
-    }
-
-    .main-menu {
-      width: 480px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-
-    #quesNavLeft {
-      margin-left: 45%;
-      margin-right: 20px;
-    }
-
-    .hideMe {
-      display: none;
-    }
-
-    #animation {
-      margin-left: 40px;
-      margin-top: -10px;
-    }
-
-    #sbMenu {
-      margin-left: 80px;
-      margin-top: 60px
-    }
-
-    .selected {
-      border: 2px solid #f00;
-    }
-
-    .answer-image {
-      float: right;
-      margin-top: -180px;
-      margin-right: 20px;
-    }
-
-    .answers {
-      line-height: 2.3;
-      margin-top: 100px;
-    }
-
-    #rev-mistakes {
-      float: right;
-      margin: -150px 0 0 0;
-    }
-
-    .lessonTitle {
-      max-width: 300px;
-      margin-top: 40px;
-      display: table;
-    }
-
-    #scores-table {
-      margin-top: 40px;
-    }
-
-    
-
-    #feedbackDiv {
-      border: none !important;
-      transform: translateZ(0);
-    }
-
-    #feedbackDiv>p {
-
-      vertical-align: middle;
-      line-height: 2;
-      margin-bottom: 20px;
-
-    }
-
-    #feedbackDiv>p>img {
-      max-height: 240px;
-      text-align: center;
-      margin-left: 10%;
-    }
-
-    #closeBtn {
-      width: 80px;
-      margin: 0;
-
-    }
-
-    .highlight {
-      -webkit-transition-duration: .5s;
-  -moz-transition-duration: .5s;
-  -o-transition-duration: .5s;
-  transition-duration: .5s;
-  -moz-box-shadow:    inset 0 0 10px #fbff00ec;
-   -webkit-box-shadow: inset 0 0 10px #fbff00ec;
-   box-shadow:         inset 0 0 10px #fbff00ec;
-   border-radius: 7px 7px 7px 7px;
--moz-border-radius: 7px 7px 7px 7px;
--webkit-border-radius: 7px 7px 7px 7px;
-    }
- 
-
-    #lessonData {
-      position: fixed;
-      /* border: 1px solid black; */
-      top: 15px;
-      left: 15px;
-      padding: 15px 15px 5px 30px;
-
-    }
-
-    #lessonData>p {
-
-      font-size: 14px;
-      font-family: Arial, Helvetica, sans-serif;
-
-    }
-
-    #info-button {
-      background-color: none;
-      border: none;
-    }
-  </style>
 </head>
 
 <body>
 
   <button id='info-button'>
-    <img src='infobtn.png' height='30px' />
+    <img src='img/infobtn.png' height='30px' />
   </button>
   <div id="lessonData">
-    <p>Welcome! Use the arrows  <img src='sbLeft.png'> <img src='sbRight.png'> to navigate.</p>
+    <p>Welcome! Use the arrows  <img src='img/sbLeft.png'> <img src='img/sbRight.png'> to navigate.</p>
     <p>Pess <a style="border: 2px solid black; border-radius: 8px; padding: 3px">SELECT</a> to choose the <a style="border: 1px solid red; border-radius: 5px; padding: 3px"> highlighted</a> item.</p>
     <p> Press <a style="border: 2px solid black; border-radius: 8px; padding: 3px">MENU</a> to go back.</p>
     <p>Press the A, B, C, D, buttons to answer questions.</p>
@@ -297,13 +29,13 @@
       <!--StudyBuddy Left Buttons-->
       <div id='outerLeft'>
         <div class="answerBtns">
-          <input type="image" src="btnA.png" data-clicked class="answerBtn" id="btnA" value="a">
+          <input type="image" src="img/btnA.png" data-clicked class="answerBtn" id="btnA" value="a">
           <br>
-          <input type="image" src="btnB.png" data-clicked class="answerBtn" id="btnB" value="b">
+          <input type="image" src="img/btnB.png" data-clicked class="answerBtn" id="btnB" value="b">
           <br>
-          <input type="image" src="btnC.png" data-clicked class="answerBtn" id="btnC" value="c">
+          <input type="image" src="img/btnC.png" data-clicked class="answerBtn" id="btnC" value="c">
           <br>
-          <input type="image" src="btnD.png" data-clicked class="answerBtn" id="btnD" value="d">
+          <input type="image" src="img/btnD.png" data-clicked class="answerBtn" id="btnD" value="d">
           <br>
         </div>
       </div>
@@ -313,28 +45,28 @@
       <div id='outerRight'>
         <div class="sbMenuBtns">
           <a id='sbUp' class='sbArrow'>
-            <img src='sbUp.png'>
+            <img src='img/sbUp.png'>
           </a>
           <br>
           <a id='sbLft' class='sbArrow'>
-            <img src='sbLeft.png'>
+            <img src='img/sbLeft.png'>
           </a>
 
           <a id='sbRt' class='sbArrow'>
-            <img src='sbRight.png'>
+            <img src='img/sbRight.png'>
           </a>
           <br>
           <a id='sbDwn' class='sbArrow'>
-            <img src='sbDown.png'>
+            <img src='img/sbDown.png'>
           </a>
         </div>
         <br>
         <a class='sbMenSel'>
-          <img id='sbSelectBtn' src='sbSelect.png'>
+          <img id='sbSelectBtn' src='img/sbSelect.png'>
         </a>
         <br>
         <a class='sbMenSel'>
-          <img id='sbMenuBtn' data: src='sbMenu.png'>
+          <img id='sbMenuBtn' data: src='img/sbMenu.png'>
         </a>
       </div>
       <!--StudyBuddy Buttons-->
@@ -354,7 +86,7 @@
   <!--  SCRIPTS  -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-  <script src="studyBuddy.js">
+  <script src="/assets/studyBuddy.js">
   </script>
 </body>
 
