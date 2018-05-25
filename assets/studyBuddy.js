@@ -187,25 +187,25 @@ jQuery(document).ready(function($) {
           text: "(24 x 10) + (24 x 2)",
           correct: true,
           feedback:
-            "<img src='./img/ma00.png' class='feedback-img' /><p>This expression shows the multiplication.</p>"
+            "<img src='./studybuddy/img/ma00.png' class='feedback-img' /><p>This expression shows the multiplication.</p>"
         },
         {
           text: "(24 x 10) + (12 x 2)",
           correct: false,
           feedback:
-            "<img src='./img/ma00.png' /><p>Find the expression that shows this sum.</p>"
+            "<img src='./studybuddy/img/ma00.png' /><p>Find the expression that shows this sum.</p>"
         },
         {
           text: "(2 x 20) + (4 x 2)",
           correct: false,
           feedback:
-            "<img src='./img/ma00.png' /><p>Find the expression that shows this sum.</p>"
+            "<img src='./studybuddy/img/ma00.png' /><p>Find the expression that shows this sum.</p>"
         },
         {
           text: "(24 x 10) + (24 x 12)",
           correct: false,
           feedback:
-            "<img src='./img/ma00.png' /><p>Find the expression that shows this sum.</p>"
+            "<img src='./studybuddy/img/ma00.png' /><p>Find the expression that shows this sum.</p>"
         }
       ]
     },
@@ -220,22 +220,22 @@ jQuery(document).ready(function($) {
         {
           text: "552 fish",
           correct: true,
-          feedback: "<img src='./img/ma1c.png' />"
+          feedback: "<img src='./studybuddy/img/ma1c.png' />"
         },
         {
           text: "382 fish",
           correct: false,
-          feedback: "<img src='./img/ma1i.png' />"
+          feedback: "<img src='./studybuddy/img/ma1i.png' />"
         },
         {
           text: "632 fish",
           correct: false,
-          feedback: "<img src='./img/ma1i.png' />"
+          feedback: "<img src='./studybuddy/img/ma1i.png' />"
         },
         {
           text: "452 fish",
           correct: false,
-          feedback: "<img src='./img/ma1i.png' />"
+          feedback: "<img src='./studybuddy/img/ma1i.png' />"
         }
       ]
     },
@@ -250,23 +250,23 @@ jQuery(document).ready(function($) {
         {
           text: "(3 x 2,000) + (3 x 500) + (3 x 2)",
           correct: true,
-          feedback: "<img src='./img/ma2c.png' />"
+          feedback: "<img src='./studybuddy/img/ma2c.png' />"
         },
         {
           text: "(3 x 25) + (3 x 2)",
           correct: false,
-          feedback: "<img src='./img/ma2i.png' />"
+          feedback: "<img src='./studybuddy/img/ma2i.png' />"
         },
         {
           text: "(2 x 2500) + (1 x 2)",
           correct: false,
-          feedback: "<img src='./img/ma2i.png' />"
+          feedback: "<img src='./studybuddy/img/ma2i.png' />"
         },
         {
           letter: "d",
           text: "(3 x 2,000) + (3 x 50) + (3 x 2)",
           correct: false,
-          feedback: "<img src='./img/ma2i.png' />"
+          feedback: "<img src='./studybuddy/img/ma2i.png' />"
         }
       ]
     },
@@ -281,23 +281,23 @@ jQuery(document).ready(function($) {
         {
           text: "(8 x 700) + (8 x 60) + (8 x 1)",
           correct: true,
-          feedback: "<img src='./img/ma3c.png' />"
+          feedback: "<img src='./studybuddy/img/ma3c.png' />"
         },
         {
           text: "(8 x 70) + (8 x 6) + (8 x 1)",
           correct: false,
-          feedback: "<img src='./img/ma3i.png' />"
+          feedback: "<img src='./studybuddy/img/ma3i.png' />"
         },
         {
           text: "(8 x 76) + (8 x 1)",
           correct: false,
-          feedback: "<img src='./img/ma3i.png' />"
+          feedback: "<img src='./studybuddy/img/ma3i.png' />"
         },
         {
           letter: "d",
           text: "(8 x 70) + (8 x 61)",
           correct: false,
-          feedback: "<img src='./img/ma3i.png' />"
+          feedback: "<img src='./studybuddy/img/ma3i.png' />"
         }
       ]
     },
@@ -311,17 +311,17 @@ jQuery(document).ready(function($) {
         {
           text: "288 cookies",
           correct: true,
-          feedback: "<img  src='./img/ma4c.png' />"
+          feedback: "<img  src='./studybuddy/img/ma4c.png' />"
         },
         {
           text: "248 cookies",
           correct: false,
-          feedback: "<img  src='./img/ma4c.png' />"
+          feedback: "<img  src='./studybuddy/img/ma4c.png' />"
         },
         {
           text: "1,284 cookies",
           correct: false,
-          feedback: "<img  src='./img/ma4c.png' />"
+          feedback: "<img  src='./studybuddy/img/ma4c.png' />"
         },
         {
           letter: "d",
@@ -357,7 +357,7 @@ jQuery(document).ready(function($) {
   var animationDiv = $("#animation");
 
   var quesBottom = $(
-    "<span id='questionBottom'><a>Press</a> <img src='../img/iconQ.png' id='bottomQ' width='25 px'> <a>for feedback</a></span>"
+    "<span id='questionBottom'><a>Press</a> <img  src='./studybuddy/img/iconQ.png' id='bottomQ' width='25 px'> <a>for feedback</a></span>"
   );
 
   var hiddenMenus;
@@ -589,8 +589,8 @@ jQuery(document).ready(function($) {
     console.log("renderMenu questionCounter", questionCounter);
     var mainMenuDiv = $("<div class='navItem' value='0'>");
     var mainMenu = $(
-      "<div class='main-menu'><input type='image' ind='0' data = 'Math' value='large' class ='sbSubject selectable' src='../img/math.png'/>" +
-        "<input type='image' ind='0' data = 'Science' value='large' class='sbSubject' src='../img/science.png'/>"
+      "<div class='main-menu'><input type='image' ind='0' data = 'Math' value='large' class ='sbSubject selectable'  src='./studybuddy/img/math.png'/>" +
+        "<input type='image' ind='0' data = 'Science' value='large' class='sbSubject'  src='./studybuddy/img/science.png'/>"
     );
 
     var viewScores = $("<h4>View Scores</h4>")
@@ -649,7 +649,7 @@ jQuery(document).ready(function($) {
 
           break;
         case "Scores":
-          toggleFrame($("<img  src='./img/scores.png' id='scores-table' />"));
+          toggleFrame($("<img  src='./studybuddy/img/scores.png' id='scores-table' />"));
       }
     });
     subjectMenu.click(function() {
@@ -772,7 +772,7 @@ jQuery(document).ready(function($) {
       })
       .prepend(
         //adds the abcd icons
-        "<a id='ansBtnA'><img class='answer-icon' src='./img/iconA.png' data-image='img/iconQ.png' id = 'iconA' alt='A) ' width='25' height='25'>"
+        "<a id='ansBtnA'><img class='answer-icon' src='./studybuddy/img/iconA.png' data-image='img/iconQ.png' id = 'iconA' alt='A) ' width='25' height='25'>"
       );
 
     $(answerBank[1])
@@ -781,7 +781,7 @@ jQuery(document).ready(function($) {
         "data-letter": "b"
       })
       .prepend(
-        "<a id='ansBtnB'><img class='answer-icon' src='./img/iconB.png' data-image='img/iconQ.png' id = 'iconB' alt='B) ' width='25' height='25'>"
+        "<a id='ansBtnB'><img class='answer-icon' src='./studybuddy/img/iconB.png' data-image='img/iconQ.png' id = 'iconB' alt='B) ' width='25' height='25'>"
       );
     $(answerBank[2])
       .attr({
@@ -789,7 +789,7 @@ jQuery(document).ready(function($) {
         "data-letter": "c"
       })
       .prepend(
-        "<a id='ansBtnC'><img class='answer-icon' src='./img/iconC.png' data-image='img/iconQ.png' id = 'iconC' alt='C) ' width='25' height='25'> "
+        "<a id='ansBtnC'><img class='answer-icon' src='./studybuddy/img/iconC.png' data-image='img/iconQ.png' id = 'iconC' alt='C) ' width='25' height='25'> "
       );
     $(answerBank[3])
       .attr({
@@ -797,7 +797,7 @@ jQuery(document).ready(function($) {
         "data-letter": "d"
       })
       .prepend(
-        "<a id='ansBtnD'><img class='answer-icon' src='./img/iconD.png'id = 'iconD' data-image='img/iconQ.png' alt='D) ' width='25' height='25'> "
+        "<a id='ansBtnD'><img class='answer-icon' src='./studybuddy/img/iconD.png'id = 'iconD' data-image='img/iconQ.png' alt='D) ' width='25' height='25'> "
       );
     //Appends answeres to question
     answerBank.forEach(function(answer) {
@@ -814,7 +814,7 @@ jQuery(document).ready(function($) {
     //for review mistakes, adds X next to previous answer
     if ($(".prev-answered")) {
       $(".prev-answered").prepend(
-        "<img src='./img/iconX.png' height=b'25 width ='25' class='x-icon'>"
+        "<img src='./studybuddy/img/iconX.png' height=b'25 width ='25' class='x-icon'>"
       );
     }
   }
@@ -861,10 +861,10 @@ jQuery(document).ready(function($) {
 
     //Correct/Incorrect Icons
     var iconX = $(
-      "<img src='./img/iconX.png' height=b'25 width ='25' class='x-icon'>"
+      "<img src='./studybuddy/img/iconX.png' height=b'25 width ='25' class='x-icon'>"
     );
     var iconY = $(
-      "<img src='./img/iconY.png' height='25 width ='25' class='y-icon'>"
+      "<img src='./studybuddy/img/iconY.png' height='25 width ='25' class='y-icon'>"
     );
     // Switch statement to handle whether to score a question and/or move on.
     switch (true) {
@@ -937,7 +937,7 @@ jQuery(document).ready(function($) {
       $("#questionBottom").hide();
       frameDiv.append(feedbackDiv);
       $("#studyBuddy").append(
-        "<span id='FBarrow'><a class='arrowtext'>Back</a><img src='./img/arrows.png' width='50px' style='padding-top:10px; margin-bottom: -15px'><a class='arrowtext'>Next</a></span>"
+        "<span id='FBarrow'><a class='arrowtext'>Back</a><img src='./studybuddy/img/arrows.png' width='50px' style='padding-top:10px; margin-bottom: -15px'><a class='arrowtext'>Next</a></span>"
       );
       feedbackShown = true;
       feedbackDiv.html("<p>" + feedbackText + "</p>").addClass("feedback");
