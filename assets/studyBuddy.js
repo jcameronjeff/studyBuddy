@@ -334,14 +334,7 @@ jQuery(document).ready(function($) {
     }
   ];
 
-  setTimeout(function() {
-    $("#lessonData").hide(1000);
-  }, 5000);
-
-  $("#info-button").on("click", function() {
-    $("#lessonData").toggle(1000);
-  });
-
+ 
   //--------------------------//
   //      Dom Elements
   //--------------------------//
