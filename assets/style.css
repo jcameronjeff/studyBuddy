@@ -180,6 +180,7 @@ img {
 
 #feedbackDiv>p>img {
   max-height: 240px;
+  height: 167px;
   text-align: center;
   margin-left: 10%;
 }
