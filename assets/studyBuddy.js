@@ -697,21 +697,25 @@ jQuery(document).ready(function ($) {
       .attr({id: "answa", "data-letter": "a"})
       .prepend(
       //adds the abcd icons
-      "<a id='ansBtnA'><img class='answer-icon'  src='./img/iconA.png' data-image='img/" +
-          "iconQ.png' id = 'iconA' alt='A) ' width='25' height='25'>");
+      "<a id='ansBtnA' class='innerAnswer' data-letter='A'><img class='answer-icon'  sr" +
+          "c='./img/iconA.png' data-image='img/iconQ.png' id = 'iconA' alt='A' width='25' h" +
+          "eight='25'>");
 
     $(answerBank[1])
       .attr({id: "answb", "data-letter": "b"})
-      .prepend("<a id='ansBtnB'><img class='answer-icon'  src='./img/iconB.png' data-image='img/" +
-          "iconQ.png' id = 'iconB' alt='B) ' width='25' height='25'>");
+      .prepend("<a id='ansBtnB' class='innerAnswer' data-letter='B'><img class='answer-icon'  sr" +
+          "c='./img/iconB.png' data-image='img/iconQ.png' id = 'iconB' alt='B' width='25' h" +
+          "eight='25'>");
     $(answerBank[2])
       .attr({id: "answc", "data-letter": "c"})
-      .prepend("<a id='ansBtnC'><img class='answer-icon'  src='./img/iconC.png' data-image='img/" +
-          "iconQ.png' id = 'iconC' alt='C) ' width='25' height='25'> ");
+      .prepend("<a id='ansBtnC' class='innerAnswer' data-letter='C'><img class='answer-icon'  sr" +
+          "c='./img/iconC.png' data-image='img/iconQ.png' id = 'iconC' alt='C' width='25' h" +
+          "eight='25'> ");
     $(answerBank[3])
       .attr({id: "answd", "data-letter": "d"})
-      .prepend("<a id='ansBtnD'><img class='answer-icon'  src='./img/iconD.png'id = 'iconD' data" +
-          "-image='img/iconQ.png' alt='D) ' width='25' height='25'> ");
+      .prepend("<a id='ansBtnD' class='innerAnswer' data-letter='D'><img class='answer-icon'  sr" +
+          "c='./img/iconD.png'id = 'iconD' data-image='img/iconQ.png' alt='D' width='25' he" +
+          "ight='25'> ");
     //Appends answeres to question
     answerBank.forEach(function (answer) {
       $(stem).append(answer);
@@ -728,6 +732,13 @@ jQuery(document).ready(function ($) {
     if ($(".prev-answered")) {
       $(".prev-answered").prepend("<img  src='./img/iconX.png' height='20' width ='20' class='x-icon'>");
     }
+
+    $(".innerAnswer")
+      .click(function () {
+        var letter = $(this).attr('data-letter');
+        var buttonId = $("#btn" + letter);
+        buttonId.click();
+      })
   }
   //end of makeQuestion() Answer click handlers handles user answer
   $(".answerBtn")
@@ -737,7 +748,7 @@ jQuery(document).ready(function ($) {
         $("#feedbackDiv").remove();
         $("#FBarrow").remove();
         questionHTML.show();
-        $("#questionBottom").show(// takes the button value to associate w/ corresponding answer choice
+        $("#questionBottom").show( // takes the button value to associate w/ corresponding answer choice
         );
       } else {
         var choiceId = $(this).attr("value");
